@@ -46,17 +46,17 @@
         background-position: center bottom;
       }
 
-      .espresso .swapcard {
+      .home .swapcard {
         min-height: 175px;
       }
-      .espresso .swapcard2 {
+      .home .swapcard2 {
         min-height: 115px;
       }
       .web3 .web3false {
         display: none;
       }
 
-      .espresso h2 {
+      .home h2 {
         font-weight: 900;
         color: white;
         text-transform: uppercase;
@@ -83,6 +83,12 @@
         top: -10px;
         font-size: 20px;
       }
+      .yield-badge-upgrade {
+        position: absolute;
+        right: -10px;
+        top: 30px;
+        font-size: 20px;
+      }
       body.approved .not-approved-spend {
         display: none;
       }
@@ -104,7 +110,7 @@
       }
 
       .card {
-        border-radius: 53px;
+        border-radius: 50px;
         background: linear-gradient(145deg, #612801, #742f01);
         box-shadow:  5px 5px 10px #562301, 
                     -5px -5px 10px #823501;        
@@ -112,8 +118,8 @@
 
       .mainCard{
         display: inline-block;
-        width: 220px;
-        height: 220px;            
+        width: 300px;
+        /* height: 220px;             */
         padding-top: 40px;    
       }
 
@@ -185,8 +191,8 @@
       .eth {
         background-image: url("images/eth.png");
       }
-      .usdc {
-        background-image: url("images/usdc.png");
+      .usdt {
+        background-image: url("images/usdt.png");
       }
       .uni {
         background-image: url("images/uni.png");
@@ -210,6 +216,16 @@
         color: #fff;
       }
       /* Custom default button */
+      .btn-disabled {
+        min-width: 100;
+        background-color: grey;
+        border-radius: 50px;
+        display: inline-block;
+        padding: 17px 0 12px;
+        text-decoration: none;
+        font-size: 15px;
+      }
+
       .btn-secondary {
         min-width: 100;
         background-color: #612801;
@@ -222,6 +238,18 @@
 
       .btn-secondary:hover,
       .btn-secondary:focus {
+        color: #333;
+        text-shadow: none; /* Prevent inheritance from `body` */
+        background-color: #fff;
+        border: 0.05rem solid #fff;
+      }
+
+      .btn-danger:hover,
+      .btn-danger:focus,
+      .btn-primary:hover,
+      .btn-primary:focus,
+      .btn-success:hover,
+      .btn-success:focus {
         color: #333;
         text-shadow: none; /* Prevent inheritance from `body` */
         background-color: #fff;
@@ -250,7 +278,7 @@
       }
 
       .farms {
-        max-width: 80em;
+        max-width: 70em;
       }
       /*
  * Header
@@ -365,84 +393,116 @@
     <div class="w-100 h-100 mx-auto">
       <header class="masthead cover-container d-flex w-100 h-100 mx-md-auto">
         <div class="inner">
-          <img src="images/WebName.png" width="200" class="masthead-brand" onclick="nav('espresso')"></img>
-          <nav class="nav nav-masthead justify-content-center mt-3 ml-5">
-            <a class="nav-link text-light" href="#espresso" onclick="nav('espresso')">Espresso</a>
-            <a class="nav-link text-light" href="#latte" onclick="nav('latte')">Latte</a>
+          <img src="images/WebName.png" width="200" class="masthead-brand" onclick="nav('home')"></img>
+          <nav class="nav nav-masthead justify-content-center mt-3" style="margin-left: 100px;">
+            <a class="nav-link text-light" href="#home" onclick="nav('home')">Home</a>
+            <a class="nav-link text-light" href="#barista" onclick="nav('barista')">Barista</a>
             <a class="nav-link text-light" href="#farm" onclick="nav('farms')"
-              >Farm & Trade</a
+              >Cafe</a
             >
             <!-- <a class="nav-link" href="#tutorial" onclick="nav('tutorial')"
               >HOW TO FARM</a
             > -->
             <a class="nav-link text-light" 
-            href="https://medium.com/@charizard.farm" target="blank">About</a>            
+            href="#" target="blank">About</a>            
           </nav>
         </div>
       </header>
 
-      <main role="main" class="inner cover espresso mb-5">
-
-        <img src="images/logo.png" height="180" class="mt-3"/>
-        <h1 class="tokenName mb-5">Espresso</h1>
-
-          <div class="col-12">
-            <div class="web3true hide">                            
-              <div class="card mainCard">
-                
-                <div class="card-body">
-                  <div class="hide web3true">                    
-                    <h6>Token Price:</h6>
-                    <h6 class="tokenprice mb-4"><span>-.----</span> USD</h6>
-                  
-                    <h6>Balance:</h6>
-                    <h6 class="balance"><span>-.----</span> ESPR</h6>              
-                  </div>
-                </div>
-                                    
-              </div>              
-            </div>
-
-            <p class="lead web3false" >
-              <a href="#" class="btn btn-lg btn-secondary" onclick="connectWeb3()"
-                >CONNECT WALLET</a
-              >
-            </p>
-                                  
-          </div>
-      </main>
-
-      <main role="main" class="inner cover latte mb-5">
+      <main role="main" class="inner cover home mb-5">
 
         <div class="row d-flex justify-content-center">
-          <div>
-            <img src="images/logo.png" height="180" class="mt-3"/>
-            <h1 class="tokenName mb-5">Espresso</h1>
-          </div>
-            <img src="images/swap.png" height="120" class="mt-5"/>
-          <div>
-            <img src="images/logo_latte.png" height="180" class="mt-3"/>
-            <h1 class="tokenName mb-5">Latte</h1>
+          <div class="mt-4">
+              <div class="col-12">
+                <div class="card mainCard">
+                  <img src="images/logo.png" height="140"/>
+                  <h1 class="tokenName mb-3">Espresso</h1>
+                  <div class="web3true hide">                            
+                      <div class="card-body">
+                        <div class="hide web3true">                    
+                          <h6>Token Price:</h6>
+                          <h6 class="tokenprice mb-4"><span>-.----</span> USD</h6>
+                        
+                          <h6>Balance:</h6>
+                          <h6 class="balance"><span>-.----</span> ESPR</h6>              
+                        </div>
+                      </div>
+                                          
+                    </div>              
+                </div>
+              </div>
+          </div>  
+
+          <div class="mt-4">            
+              <div class="col-12">
+                <div class="card mainCard">
+                <span class="badge badge-danger yield-badge">Coming Soon</span>
+                <img src="images/logo_latte.png" height="140"/>
+                <h1 class="tokenName mb-3">Latte</h1>
+
+                <div class="web3true hide">                                                                  
+                    <div class="card-body">
+                      <div class="hide web3true">                    
+                        <h6>Token Price:</h6>
+                        <h6 class="tokenprice mb-4"><span>-.----</span> USD</h6>
+                      
+                        <h6>Balance:</h6>
+                        <h6 class="balance"><span>-.----</span> LTTE</h6>              
+                      </div>
+                    </div>
+                                        
+                  </div>              
+                </div>
+              </div>
+          </div>  
+        </div>
+
+        <p class="lead web3false mt-5" >
+          <a href="#" class="btn btn-lg btn-secondary" onclick="connectWeb3()"
+            >CONNECT WALLET</a
+          >
+        </p>
+                  
+      </main>
+
+      <main role="main" class="inner cover barista mb-5" style="display: none">
+        
+        <div class="card swapcardsmall">          
+          <div class="card-body">
+            <h3 class="tokenName mb-2">Latte Price</h3>
+            <h6 class="balance"><span>-.----</span> ESPR</h6>
           </div>
         </div>
 
-        <div class="col-12">
-          <div class="web3true hide">                            
-            <div class="card mainCard">
-              
-              <div class="card-body">
-                <div class="hide web3true">                    
-                  <h6>Token Price:</h6>
-                  <h6 class="tokenprice mb-4"><span>-.----</span> USD</h6>
-                
-                  <h6>Balance:</h6>
-                  <h6 class="balance"><span>-.----</span> ESPR</h6>              
-                </div>
+        <div class="col-12 row justify-content-center mt-4">
+          <div class="card" style="width: 450px; padding: 20px; min-height: 380px;">
+            <span class="badge badge-danger yield-badge">Coming Soon</span>
+            <div class="row d-flex justify-content-center">
+              <div>
+                <img src="images/logo.png" height="140" class="mt-3"/>
+                <h1 class="tokenName mb-3">Espresso</h1>
+                <h6>Your Balance:</h6>
+                <h6 class="balance"><span>-.----</span> ESPR</h6>
               </div>
-                                  
-            </div>              
+                <img src="images/swap.png" height="100" class="mt-5"/>
+              <div>
+                <img src="images/logo_latte.png" height="140" class="mt-3"/>
+                <h1 class="tokenName mb-3">Latte</h1>
+                <h6>Your Balance:</h6>
+                <h6 class="balance"><span>-.----</span> LTTE</h6>
+              </div>
+            </div>
+            <a
+                href="#"
+                class="card-link btn-disabled btn-lg my-2"
+                onclick= null
+              >
+                Make Latte
+              </a>
           </div>
+        </div>
 
+        <div class="col-12 mt-4">          
           <p class="lead web3false" >
             <a href="#" class="btn btn-lg btn-secondary" onclick="connectWeb3()"
               >CONNECT WALLET</a
@@ -456,6 +516,7 @@
         <div class="row d-flex justify-content-center mt-3 mb-5">
           <div class="card swapcard">
             <span class="badge badge-danger yield-badge">6x</span>
+            <a class="badge btn btn-danger yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(0)">Vote Up</a>
             <div class="card-body my-2">
               <div class="tokenpair">
                 <div class="token1 token"></div>
@@ -489,13 +550,14 @@
           </div>
 
           <div class="card swapcard">   
-            <span class="badge badge-danger yield-badge">6x</span>         
+            <span class="badge badge-success yield-badge">6x</span>  
+            <a class="badge btn btn-success yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(1)">Vote Up</a>
             <div class="card-body my-2">
               <div class="tokenpair">
-                <div class="token1 uni"></div>
-                <div class="token2 token"></div>
+                <div class="token1 token"></div>
+                <div class="token2 eth"></div>
               </div>
-              <h5 class="card-subtitle mb-2">UNISWAP UNI/ESPR</h5>
+              <h5 class="card-subtitle mb-2">UNISWAP ESPR/ETH</h5>
         
               <h6 class="card-text apy1">
                 APY <span class="pool1yield">---.-%</span>
@@ -521,13 +583,14 @@
           </div>
 
           <div class="card swapcard">
-            <span class="badge badge-danger yield-badge">1.5x</span>
+            <span class="badge badge-primary yield-badge">6x</span>
+            <a class="badge btn btn-primary yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(2)">Vote Up</a>
             <div class="card-body my-2">
               <div class="tokenpair">
-                <div class="token1 dai"></div>
+                <div class="token1 token"></div>
                 <div class="token2 eth"></div>
               </div>
-              <h5 class="card-subtitle mb-2">UNISWAP DAI/ETH</h5>
+              <h5 class="card-subtitle mb-2">UNISWAP ESPR/ETH</h5>
               
               <h6 class="card-text apy2">
                 APY <span class="pool2yield">---.-%</span>
@@ -554,14 +617,15 @@
           </div>
 
           <div class="card swapcard">
-            <span class="badge badge-danger yield-badge">1.5x</span>
+            <span class="badge badge-danger yield-badge">3x</span>
+            <a class="badge btn btn-danger yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(3)">Vote Up</a>
 
             <div class="card-body my-2">
               <div class="tokenpair">
-                <div class="token1 usdc"></div>
-                <div class="token2 eth"></div>
+                <div class="token1 token"></div>
+                <div class="token2 usdt"></div>
               </div>
-              <h5 class="card-subtitle mb-2">UNISWAP USDC/ETH</h5>
+              <h5 class="card-subtitle mb-2">UNISWAP ESPR/USDT</h5>
               <h6 class="card-text apy3">
                 APY <span class="pool3yield">---.-%</span>
               </h6>
@@ -587,14 +651,15 @@
           </div>
 
           <div class="card swapcard">
-            <span class="badge badge-danger yield-badge">2x</span>
+            <span class="badge badge-success yield-badge">3x</span>
+            <a class="badge btn btn-success yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(4)">Vote Up</a>
 
             <div class="card-body my-2">
               <div class="tokenpair">
-                <div class="token1 link"></div>
-                <div class="token2 eth"></div>
+                <div class="token1 token"></div>
+                <div class="token2 usdt"></div>
               </div>
-              <h5 class="card-subtitle mb-2">UNISWAP LINK/ETH</h5>              
+              <h5 class="card-subtitle mb-2">UNISWAP ESPR/USDT</h5>
               <h6 class="card-text apy4">
                 APY <span class="pool5yield">---.-%</span>
               </h6>
@@ -619,14 +684,15 @@
           </div>
 
           <div class="card swapcard">
-            <span class="badge badge-danger yield-badge">2x</span>
+            <span class="badge badge-primary yield-badge">3x</span>
+            <a class="badge btn btn-primary yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(5)">Vote Up</a>
 
             <div class="card-body my-2">
               <div class="tokenpair">
-                <div class="token1 yfi"></div>
-                <div class="token2 eth"></div>
+                <div class="token1 token"></div>
+                <div class="token2 usdt"></div>
               </div>
-              <h5 class="card-subtitle mb-2">UNISWAP YFII/ETH</h5>              
+              <h5 class="card-subtitle mb-2">UNISWAP ESPR/USDT</h5>
               <h6 class="card-text apy5">
                 APY <span class="pool5yield">---.-%</span>
               </h6>
@@ -651,7 +717,8 @@
           </div>
 
           <div class="card swapcard">
-            <span class="badge badge-danger yield-badge">3x</span>
+            <span class="badge badge-danger yield-badge">2x</span>
+            <a class="badge btn btn-danger yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(6)">Vote Up</a>
             <div class="card-body my-2">
               <div class="tokenpair">
                 <div class="token1 uni"></div>
@@ -680,6 +747,167 @@
               </h6>      -->
             </div>
           </div>
+
+          <div class="card swapcard">
+            <span class="badge badge-success yield-badge">2x</span>
+            <a class="badge btn btn-success yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(7)">Vote Up</a>
+            <div class="card-body my-2">
+              <div class="tokenpair">
+                <div class="token1 uni"></div>
+                <div class="token2 eth"></div>
+              </div>
+              <h5 class="card-subtitle mb-2">UNISWAP UNI/ETH</h5>              
+              <h6 class="card-text apy7">
+                APY <span class="pool7yield">---.-%</span>
+              </h6>
+              <a
+                href="#pool7"
+                onclick="nav('pool7')"
+                class="card-link btn btn-secondary btn-lg"
+              >
+                Farm
+              </a>
+              <a
+                href="#"
+                class="card-link btn btn-secondary btn-lg"
+                onclick="getlptoken(7)"
+              >
+                Trade
+              </a>
+              <!-- <h6 class="card-text mt-2">
+                Farming start @ <span class="block7start">-</span> Block
+              </h6>      -->
+            </div>
+          </div>
+
+          <div class="card swapcard">
+            <span class="badge badge-primary yield-badge">2x</span>
+            <a class="badge btn btn-primary yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(8)">Vote Up</a>
+            <div class="card-body my-2">
+              <div class="tokenpair">
+                <div class="token1 uni"></div>
+                <div class="token2 eth"></div>
+              </div>
+              <h5 class="card-subtitle mb-2">UNISWAP UNI/ETH</h5>              
+              <h6 class="card-text apy8">
+                APY <span class="pool8yield">---.-%</span>
+              </h6>
+              <a
+                href="#pool8"
+                onclick="nav('pool8')"
+                class="card-link btn btn-secondary btn-lg"
+              >
+                Farm
+              </a>
+              <a
+                href="#"
+                class="card-link btn btn-secondary btn-lg"
+                onclick="getlptoken(8)"
+              >
+                Trade
+              </a>
+              <!-- <h6 class="card-text mt-2">
+                Farming start @ <span class="block8start">-</span> Block
+              </h6>      -->
+            </div>
+          </div>
+
+          <div class="card swapcard">
+            <span class="badge badge-danger yield-badge">1x</span>
+            <a class="badge btn btn-danger yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(9)">Vote Up</a>
+            <div class="card-body my-2">
+              <div class="tokenpair">
+                <div class="token1 dai"></div>
+                <div class="token2 eth"></div>
+              </div>
+              <h5 class="card-subtitle mb-2">UNISWAP DAI/ETH</h5>              
+              <h6 class="card-text apy9">
+                APY <span class="pool9yield">---.-%</span>
+              </h6>
+              <a
+                href="#pool9"
+                onclick="nav('pool9')"
+                class="card-link btn btn-secondary btn-lg"
+              >
+                Farm
+              </a>
+              <a
+                href="#"
+                class="card-link btn btn-secondary btn-lg"
+                onclick="getlptoken(9)"
+              >
+                Trade
+              </a>
+              <!-- <h6 class="card-text mt-2">
+                Farming start @ <span class="block9start">-</span> Block
+              </h6>      -->
+            </div>
+          </div>
+
+          <div class="card swapcard">
+            <span class="badge badge-success yield-badge">1x</span>
+            <a class="badge btn btn-success yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(10)">Vote Up</a>
+            <div class="card-body my-2">
+              <div class="tokenpair">
+                <div class="token1 dai"></div>
+                <div class="token2 eth"></div>
+              </div>
+              <h5 class="card-subtitle mb-2">UNISWAP DAI/ETH</h5>              
+              <h6 class="card-text apy10">
+                APY <span class="pool10yield">---.-%</span>
+              </h6>
+              <a
+                href="#pool10"
+                onclick="nav('pool10')"
+                class="card-link btn btn-secondary btn-lg"
+              >
+                Farm
+              </a>
+              <a
+                href="#"
+                class="card-link btn btn-secondary btn-lg"
+                onclick="getlptoken(10)"
+              >
+                Trade
+              </a>
+              <!-- <h6 class="card-text mt-2">
+                Farming start @ <span class="block10start">-</span> Block
+              </h6>      -->
+            </div>
+          </div>
+
+          <div class="card swapcard">
+            <span class="badge badge-primary yield-badge">1x</span>
+            <a class="badge btn btn-primary yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(11)">Vote Up</a>
+            <div class="card-body my-2">
+              <div class="tokenpair">
+                <div class="token1 dai"></div>
+                <div class="token2 eth"></div>
+              </div>
+              <h5 class="card-subtitle mb-2">UNISWAP DAI/ETH</h5>              
+              <h6 class="card-text apy11">
+                APY <span class="pool11yield">---.-%</span>
+              </h6>
+              <a
+                href="#pool8"
+                onclick="nav('pool11')"
+                class="card-link btn btn-secondary btn-lg"
+              >
+                Farm
+              </a>
+              <a
+                href="#"
+                class="card-link btn btn-secondary btn-lg"
+                onclick="getlptoken(11)"
+              >
+                Trade
+              </a>
+              <!-- <h6 class="card-text mt-2">
+                Farming start @ <span class="block11start">-</span> Block
+              </h6>      -->
+            </div>
+          </div>
+
         </div>
       </main>
 

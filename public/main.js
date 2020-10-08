@@ -266,7 +266,7 @@ var web3 = new Web3(
 var pools = [
   [
     "0x",
-    "UNISWAP ESPR/ETH",
+    "UNISWAP ESPR/ETH RED",
     "https://uniswap.info/pair/0x",
     6,
     0,
@@ -275,7 +275,7 @@ var pools = [
   ],
   [
     "0x",
-    "UNISWAP UNI/ESPR",
+    "UNISWAP ESPR/ETH GREEN",
     "https://uniswap.info/pair/0x",
     6,
     0,
@@ -283,36 +283,45 @@ var pools = [
     "-"
   ],
   [
-    "0xa478c2975ab1ea89e8196811f51a7b7ade33eb11",
-    "UNISWAP DAI/ETH",
-    "https://uniswap.info/pair/0xa478c2975ab1ea89e8196811f51a7b7ade33eb11",
-    1.5,
+    "0x",
+    "UNISWAP ESPR/ETH BLUE",
+    "https://uniswap.info/pair/0x",
+    6,
     0,
     0,
     "-"
   ],
   [
-    "0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc",
-    "UNISWAP USDC/ETH",
-    "https://uniswap.info/pair/0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc",
-    1.5,
+    "0x",
+    "UNISWAP ESPR/USDT RED",
+    "https://uniswap.info/pair/0x",
+    3,
     0,
     0,
     "-"
   ],
   [
-    "0xa2107FA5B38d9bbd2C461D6EDf11B11A50F6b974",
-    "UNISWAP LINK/ETH",
-    "https://uniswap.info/pair/0xa2107FA5B38d9bbd2C461D6EDf11B11A50F6b974",
-    2,
+    "0x",
+    "UNISWAP ESPR/USDT GREEN",
+    "https://uniswap.info/pair/0x",
+    3,
     0,
     0,
     "-"
   ],
   [
-    "0x8973be4402bf0a39448f419c2d64bd3591dd2299",
-    "UNISWAP YFII/ETH",
-    "https://uniswap.info/pair/0x8973be4402bf0a39448f419c2d64bd3591dd2299",
+    "0x",
+    "UNISWAP ESPR/USDT BLUE",
+    "https://uniswap.info/pair/0x",
+    3,
+    0,
+    0,
+    "-"
+  ],
+  [
+    "0xd3d2e2692501a5c9ca623199d38826e513033a17",
+    "UNISWAP UNI/ETH RED",
+    "https://uniswap.info/pair/0xd3d2e2692501a5c9ca623199d38826e513033a17",
     2,
     0,
     0,
@@ -320,17 +329,53 @@ var pools = [
   ],
   [
     "0xd3d2e2692501a5c9ca623199d38826e513033a17",
-    "UNISWAP UNI/ETH",
+    "UNISWAP UNI/ETH GREEN",
     "https://uniswap.info/pair/0xd3d2e2692501a5c9ca623199d38826e513033a17",
-    3,
+    2,
     0,
     0,
     "-"
-  ]
+  ],
+  [
+    "0xd3d2e2692501a5c9ca623199d38826e513033a17",
+    "UNISWAP UNI/ETH BLUE",
+    "https://uniswap.info/pair/0xd3d2e2692501a5c9ca623199d38826e513033a17",
+    2,
+    0,
+    0,
+    "-"
+  ],
+  [
+    "0xa478c2975ab1ea89e8196811f51a7b7ade33eb11",
+    "UNISWAP DAI/ETH RED",
+    "https://uniswap.info/pair/0xa478c2975ab1ea89e8196811f51a7b7ade33eb11",
+    1,
+    0,
+    0,
+    "-"
+  ],
+  [
+    "0xa478c2975ab1ea89e8196811f51a7b7ade33eb11",
+    "UNISWAP DAI/ETH GREEN",
+    "https://uniswap.info/pair/0xa478c2975ab1ea89e8196811f51a7b7ade33eb11",
+    1,
+    0,
+    0,
+    "-"
+  ],
+  [
+    "0xa478c2975ab1ea89e8196811f51a7b7ade33eb11",
+    "UNISWAP DAI/ETH BLUE",
+    "https://uniswap.info/pair/0xa478c2975ab1ea89e8196811f51a7b7ade33eb11",
+    1,
+    0,
+    0,
+    "-"
+  ],
 ];
 
   var loadedpools = 0;
-  var totalPoolWeight = 22; // sum of weight
+  var totalPoolWeight = 36; // sum of weight
   function updateYield() {
     // need modification
     var perblock = 11;
@@ -361,28 +406,26 @@ var pools = [
         });
       });
     });
-  
+
     var ctx1 = new web3.eth.Contract(uniswapABI, pools[1][0]);
     ctx1.methods.getReserves().call(function (err, result1) {
       ctx1.methods.totalSupply().call(function (err, result2) {
         ctx1.methods.balanceOf(farmingAddress).call(function (err, result3) {
           var totalSupply = result2; // total supply of UNI-V2
           var stakedSupply = result3; // staked amount in farm
-          var percentageOfSupplyInPool = stakedSupply / totalSupply;          
+          var percentageOfSupplyInPool = stakedSupply / totalSupply;
           pools[1][4] =
-            (perpoolunit / ((result1["_reserve1"] / Math.pow(10, 18))) *
-              100 *
-              pools[1][3]) /
-            percentageOfSupplyInPool;
+            ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
+              100 * pools[1][3]) / percentageOfSupplyInPool;
           pools[1][5] =
-            ((prices["tokenusd"] * result1["_reserve1"]) /
+            ((prices["tokenusd"] * result1["_reserve0"]) /
               Math.pow(10, 18)) *
-            percentageOfSupplyInPool;            
-          if(isNaN(parseInt(pools[1][4]))) {
-            $(".pool1yield").text('---.-%');
-          } else {
-            $(".pool1yield").animateNumbers(parseInt(pools[1][4]) + "%");
-          }
+            percentageOfSupplyInPool;
+            if(isNaN(parseInt(pools[1][4]))) {
+              $(".pool1yield").text('---.-%');
+            } else {
+              $(".pool1yield").animateNumbers(parseInt(pools[1][4]) + "%");
+            }
           loadedPool();
         });
       });
@@ -396,13 +439,11 @@ var pools = [
           var stakedSupply = result3; // staked amount in farm
           var percentageOfSupplyInPool = stakedSupply / totalSupply;
           pools[2][4] =
-            (((perpoolunit * prices["tokeneth"]) /
-              (result1["_reserve1"] / Math.pow(10, 18))) *
-              100 *
-              pools[2][3]) /
-            percentageOfSupplyInPool;
+            ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
+              100 * pools[2][3]) / percentageOfSupplyInPool;
           pools[2][5] =
-            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+            ((prices["tokenusd"] * result1["_reserve0"]) /
+              Math.pow(10, 18)) *
             percentageOfSupplyInPool;
             if(isNaN(parseInt(pools[2][4]))) {
               $(".pool2yield").text('---.-%');
@@ -422,13 +463,11 @@ var pools = [
           var stakedSupply = result3; // staked amount in farm
           var percentageOfSupplyInPool = stakedSupply / totalSupply;
           pools[3][4] =
-            (((perpoolunit * prices["tokeneth"]) /
-              (result1["_reserve1"] / Math.pow(10, 18))) *
-              100 *
-              pools[3][3]) /
-            percentageOfSupplyInPool;
+            ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
+              100 * pools[3][3]) / percentageOfSupplyInPool;
           pools[3][5] =
-            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+            ((prices["tokenusd"] * result1["_reserve0"]) /
+              Math.pow(10, 18)) *
             percentageOfSupplyInPool;
             if(isNaN(parseInt(pools[3][4]))) {
               $(".pool3yield").text('---.-%');
@@ -448,13 +487,11 @@ var pools = [
           var stakedSupply = result3; // staked amount in farm
           var percentageOfSupplyInPool = stakedSupply / totalSupply;
           pools[4][4] =
-            (((perpoolunit * prices["tokeneth"]) /
-              (result1["_reserve1"] / Math.pow(10, 18))) *
-              100 *
-              pools[4][3]) /
-            percentageOfSupplyInPool;
+            ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
+              100 * pools[4][3]) / percentageOfSupplyInPool;
           pools[4][5] =
-            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+            ((prices["tokenusd"] * result1["_reserve0"]) /
+              Math.pow(10, 18)) *
             percentageOfSupplyInPool;
             if(isNaN(parseInt(pools[4][4]))) {
               $(".pool4yield").text('---.-%');
@@ -474,13 +511,11 @@ var pools = [
           var stakedSupply = result3; // staked amount in farm
           var percentageOfSupplyInPool = stakedSupply / totalSupply;
           pools[5][4] =
-            (((perpoolunit * prices["tokeneth"]) /
-              (result1["_reserve1"] / Math.pow(10, 18))) *
-              100 *
-              pools[5][3]) /
-            percentageOfSupplyInPool;
+            ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
+              100 * pools[5][3]) / percentageOfSupplyInPool;
           pools[5][5] =
-            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+            ((prices["tokenusd"] * result1["_reserve0"]) /
+              Math.pow(10, 18)) *
             percentageOfSupplyInPool;
             if(isNaN(parseInt(pools[5][4]))) {
               $(".pool5yield").text('---.-%');
@@ -513,10 +548,142 @@ var pools = [
             } else {
               $(".pool6yield").animateNumbers(parseInt(pools[6][4]) + "%");
             }
-          loadedPool();        
+          loadedPool();
         });
       });
     });
+
+    var ctx7 = new web3.eth.Contract(uniswapABI, pools[7][0]);
+    ctx7.methods.getReserves().call(function (err, result1) {
+      ctx7.methods.totalSupply().call(function (err, result2) {
+        ctx7.methods.balanceOf(farmingAddress).call(function (err, result3) {
+          var totalSupply = result2; // total supply of UNI-V2
+          var stakedSupply = result3; // staked amount in farm
+          var percentageOfSupplyInPool = stakedSupply / totalSupply;
+          pools[7][4] =
+            (((perpoolunit * prices["tokeneth"]) /
+              (result1["_reserve1"] / Math.pow(10, 18))) *
+              100 *
+              pools[7][3]) /
+            percentageOfSupplyInPool;
+          pools[7][5] =
+            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+            percentageOfSupplyInPool;
+            if(isNaN(parseInt(pools[7][4]))) {
+              $(".pool7yield").text('---.-%');
+            } else {
+              $(".pool7yield").animateNumbers(parseInt(pools[7][4]) + "%");
+            }
+          loadedPool();
+        });
+      });
+    });
+
+    var ctx8 = new web3.eth.Contract(uniswapABI, pools[8][0]);
+    ctx8.methods.getReserves().call(function (err, result1) {
+      ctx8.methods.totalSupply().call(function (err, result2) {
+        ctx8.methods.balanceOf(farmingAddress).call(function (err, result3) {
+          var totalSupply = result2; // total supply of UNI-V2
+          var stakedSupply = result3; // staked amount in farm
+          var percentageOfSupplyInPool = stakedSupply / totalSupply;
+          pools[8][4] =
+            (((perpoolunit * prices["tokeneth"]) /
+              (result1["_reserve1"] / Math.pow(10, 18))) *
+              100 *
+              pools[8][3]) /
+            percentageOfSupplyInPool;
+          pools[8][5] =
+            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+            percentageOfSupplyInPool;
+            if(isNaN(parseInt(pools[8][4]))) {
+              $(".pool8yield").text('---.-%');
+            } else {
+              $(".pool8yield").animateNumbers(parseInt(pools[8][4]) + "%");
+            }
+          loadedPool();
+        });
+      });
+    });
+
+    var ctx9 = new web3.eth.Contract(uniswapABI, pools[9][0]);
+    ctx9.methods.getReserves().call(function (err, result1) {
+      ctx9.methods.totalSupply().call(function (err, result2) {
+        ctx9.methods.balanceOf(farmingAddress).call(function (err, result3) {
+          var totalSupply = result2; // total supply of UNI-V2
+          var stakedSupply = result3; // staked amount in farm
+          var percentageOfSupplyInPool = stakedSupply / totalSupply;
+          pools[9][4] =
+            (((perpoolunit * prices["tokeneth"]) /
+              (result1["_reserve1"] / Math.pow(10, 18))) *
+              100 *
+              pools[9][3]) /
+            percentageOfSupplyInPool;
+          pools[9][5] =
+            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+            percentageOfSupplyInPool;
+            if(isNaN(parseInt(pools[9][4]))) {
+              $(".pool9yield").text('---.-%');
+            } else {
+              $(".pool9yield").animateNumbers(parseInt(pools[9][4]) + "%");
+            }
+          loadedPool();
+        });
+      });
+    });
+
+    var ctx10 = new web3.eth.Contract(uniswapABI, pools[10][0]);
+    ctx10.methods.getReserves().call(function (err, result1) {
+      ctx10.methods.totalSupply().call(function (err, result2) {
+        ctx10.methods.balanceOf(farmingAddress).call(function (err, result3) {
+          var totalSupply = result2; // total supply of UNI-V2
+          var stakedSupply = result3; // staked amount in farm
+          var percentageOfSupplyInPool = stakedSupply / totalSupply;
+          pools[10][4] =
+            (((perpoolunit * prices["tokeneth"]) /
+              (result1["_reserve1"] / Math.pow(10, 18))) *
+              100 *
+              pools[10][3]) /
+            percentageOfSupplyInPool;
+          pools[10][5] =
+            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+            percentageOfSupplyInPool;
+            if(isNaN(parseInt(pools[10][4]))) {
+              $(".pool10yield").text('---.-%');
+            } else {
+              $(".pool10yield").animateNumbers(parseInt(pools[10][4]) + "%");
+            }
+          loadedPool();
+        });
+      });
+    });
+
+    var ctx11 = new web3.eth.Contract(uniswapABI, pools[11][0]);
+    ctx11.methods.getReserves().call(function (err, result1) {
+      ctx11.methods.totalSupply().call(function (err, result2) {
+        ctx11.methods.balanceOf(farmingAddress).call(function (err, result3) {
+          var totalSupply = result2; // total supply of UNI-V2
+          var stakedSupply = result3; // staked amount in farm
+          var percentageOfSupplyInPool = stakedSupply / totalSupply;
+          pools[11][4] =
+            (((perpoolunit * prices["tokeneth"]) /
+              (result1["_reserve1"] / Math.pow(10, 18))) *
+              100 *
+              pools[11][3]) /
+            percentageOfSupplyInPool;
+          pools[11][5] =
+            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+            percentageOfSupplyInPool;
+            if(isNaN(parseInt(pools[11][4]))) {
+              $(".pool11yield").text('---.-%');
+            } else {
+              $(".pool11yield").animateNumbers(parseInt(pools[11][4]) + "%");
+            }
+          loadedPool();
+        });
+      });
+    });
+
+  
   }
   
   async function connectWeb3() {
@@ -547,6 +714,11 @@ var pools = [
     $(".block4start").text(pools[4][6]);
     $(".block5start").text(pools[5][6]);
     $(".block6start").text(pools[6][6]);
+    $(".block7start").text(pools[7][7]);
+    $(".block8start").text(pools[8][8]);
+    $(".block9start").text(pools[9][9]);
+    $(".block10start").text(pools[10][10]);
+    $(".block11start").text(pools[11][11]);
     getBalance(ethaddress);
   }
   function getSupply() {
@@ -642,6 +814,11 @@ var pools = [
       });
     });
   }
+  
+  function vote(id) {
+    alert("Coming Soon");
+  }
+
   function approveSpend() {
     var contract = new web3.eth.Contract(erc20ABI, currentPageToken);
     contract.methods
