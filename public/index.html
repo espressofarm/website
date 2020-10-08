@@ -407,11 +407,14 @@
       <header class="masthead cover-container d-flex w-100 h-100 mx-md-auto">
         <div class="inner">
           <img src="images/WebName.png" width="200" class="masthead-brand" onclick="nav('home')"></img>
-          <nav class="nav nav-masthead justify-content-center mt-3 ml-5">
+          <nav class="nav nav-masthead justify-content-center mt-3 ml-4">
             <a class="nav-link text-light" href="#home" onclick="nav('home')">Home</a>
             <a class="nav-link text-light" href="#barista" onclick="nav('barista')">Barista</a>
             <a class="nav-link text-light" href="#farm" onclick="nav('farms')"
               >Cafe</a
+            >
+            <a class="nav-link text-light" href="#upsize" onclick="nav('upsize')"
+              >Upsize</a
             >
             <a class="nav-link text-light" href="#game" onclick="nav('game')"
               >Game</a
@@ -910,6 +913,125 @@
           </div>
 
         </div>
+      </main>
+
+      <main role="main" class="inner cover upsize mb-5" style="display: none">
+
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="mt-4">            
+            <div class="col-12">
+              <div class="mt-4" style="width: 620px;">
+                <h1> Upsize Your Cafe </h1>
+                <p>Vote and upsize your cafe farm rate for 24h!</p>
+              </div>
+            </div>            
+          </div>  
+
+          <div class="mt-4">            
+            <div class="col-12">
+              <div class="card miniCard">            
+                <div class="row d-flex justify-content-center">
+                  <div>
+                    <img src="images/logo_latte.png" height="80"/>                
+                  </div>  
+    
+                  <div class="web3true hide">                                                                  
+                    <div class="card-body">
+                      <div class="hide web3true">                    
+                        <h6>Your Balance:</h6>
+                        <h6 class="balancelatte"><span>-.----</span> LTTE</h6>              
+                      </div>
+                    </div>                                  
+                  </div>  
+                </div>                                  
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row d-flex justify-content-center">
+          <div class="mt-4">            
+            <div class="col-12">
+              <div class="card mainCard">
+                <span class="badge badge-danger yield-badge">Coming Soon</span>
+                <img src="images/red_cafe.png" height="100"/>
+                <h1 class="tokenName mb-3">Red</h1>
+
+                <div class="web3true hide">                                                                  
+                    <div class="card-body">
+                      <div class="hide web3true">                    
+                        <h6>Pool balance:</h6>
+                        <h6 class="tokenprice mb-4"><span>-.----</span> LTTE</h6>                    
+                        <a
+                          href="#"
+                          class="card-link btn-secondary btn-lg my-2"
+                          style="width: 200px;"
+                          onclick= "vote(0)"
+                        >
+                          Vote
+                        </a>                      
+                      </div>
+                    </div>                                      
+                </div>
+              </div>
+            </div>            
+          </div>  
+
+          <div class="mt-4">            
+            <div class="col-12">
+              <div class="card mainCard">
+                <span class="badge badge-success yield-badge">Coming Soon</span>
+                <img src="images/cafe_green.png" height="100"/>
+                <h1 class="tokenName mb-3">Green</h1>
+
+                <div class="web3true hide">                                                                  
+                  <div class="card-body">
+                    <div class="hide web3true">                    
+                      <h6>Pool balance:</h6>
+                      <h6 class="tokenprice mb-4"><span>-.----</span> LTTE</h6>                    
+                      <a
+                        href="#"
+                        class="card-link btn-secondary btn-lg my-2"
+                        style="width: 200px;"
+                        onclick= "vote(1)"
+                      >
+                        Vote
+                      </a>                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">            
+            <div class="col-12">
+              <div class="card mainCard">
+                <span class="badge badge-primary yield-badge">Coming Soon</span>
+                <img src="images/blue_cafe.png" height="100"/>
+                <h1 class="tokenName mb-3">Blue</h1>
+
+                <div class="web3true hide">                                                                  
+                  <div class="card-body">
+                    <div class="hide web3true">                    
+                      <h6>Pool balance:</h6>
+                      <h6 class="tokenprice mb-4"><span>-.----</span> LTTE</h6>                    
+                      <a
+                        href="#"
+                        class="card-link btn-secondary btn-lg my-2"
+                        style="width: 200px;"
+                        onclick= "vote(2)"
+                      >
+                        Vote
+                      </a>                      
+                    </div>
+                  </div>                                      
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </main>
 
       <main role="main" class="inner cover game mb-5" style="display: none">
