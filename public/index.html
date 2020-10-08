@@ -89,6 +89,12 @@
         top: 30px;
         font-size: 20px;
       }
+      .yield-badge-tip {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        font-size: 20px;
+      }
       body.approved .not-approved-spend {
         display: none;
       }
@@ -121,6 +127,13 @@
         width: 300px;
         /* height: 220px;             */
         padding-top: 40px;    
+      }
+
+      .miniCard{
+        display: inline-block;
+        width: 300px;
+        height: 100px;            
+        padding-top: 8px;    
       }
 
       .swapcard {
@@ -394,11 +407,14 @@
       <header class="masthead cover-container d-flex w-100 h-100 mx-md-auto">
         <div class="inner">
           <img src="images/WebName.png" width="200" class="masthead-brand" onclick="nav('home')"></img>
-          <nav class="nav nav-masthead justify-content-center mt-3" style="margin-left: 100px;">
+          <nav class="nav nav-masthead justify-content-center mt-3 ml-5">
             <a class="nav-link text-light" href="#home" onclick="nav('home')">Home</a>
             <a class="nav-link text-light" href="#barista" onclick="nav('barista')">Barista</a>
             <a class="nav-link text-light" href="#farm" onclick="nav('farms')"
               >Cafe</a
+            >
+            <a class="nav-link text-light" href="#game" onclick="nav('game')"
+              >Game</a
             >
             <!-- <a class="nav-link" href="#tutorial" onclick="nav('tutorial')"
               >HOW TO FARM</a
@@ -444,17 +460,17 @@
                     <div class="card-body">
                       <div class="hide web3true">                    
                         <h6>Token Price:</h6>
-                        <h6 class="tokenprice mb-4"><span>-.----</span> USD</h6>
+                        <h6 class="tokenlatteprice mb-4"><span>-.----</span> USD</h6>
                       
                         <h6>Balance:</h6>
-                        <h6 class="balance"><span>-.----</span> LTTE</h6>              
+                        <h6 class="balancelatte"><span>-.----</span> LTTE</h6>              
                       </div>
                     </div>
                                         
                   </div>              
                 </div>
               </div>
-          </div>  
+          </div>
         </div>
 
         <p class="lead web3false mt-5" >
@@ -489,7 +505,7 @@
                 <img src="images/logo_latte.png" height="140" class="mt-3"/>
                 <h1 class="tokenName mb-3">Latte</h1>
                 <h6>Your Balance:</h6>
-                <h6 class="balance"><span>-.----</span> LTTE</h6>
+                <h6 class="balancelatte"><span>-.----</span> LTTE</h6>
               </div>
             </div>
             <a
@@ -515,8 +531,7 @@
       <main role="main" class="inner cover farms cover-container mx-auto" style="display: none">
         <div class="row d-flex justify-content-center mt-3 mb-5">
           <div class="card swapcard">
-            <span class="badge badge-danger yield-badge">6x</span>
-            <a class="badge btn btn-danger yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(0)">Vote Up</a>
+            <span class="badge badge-danger yield-badge">6x</span>            
             <div class="card-body my-2">
               <div class="tokenpair">
                 <div class="token1 token"></div>
@@ -550,8 +565,7 @@
           </div>
 
           <div class="card swapcard">   
-            <span class="badge badge-success yield-badge">6x</span>  
-            <a class="badge btn btn-success yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(1)">Vote Up</a>
+            <span class="badge badge-success yield-badge">6x</span>              
             <div class="card-body my-2">
               <div class="tokenpair">
                 <div class="token1 token"></div>
@@ -583,8 +597,7 @@
           </div>
 
           <div class="card swapcard">
-            <span class="badge badge-primary yield-badge">6x</span>
-            <a class="badge btn btn-primary yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(2)">Vote Up</a>
+            <span class="badge badge-primary yield-badge">6x</span>            
             <div class="card-body my-2">
               <div class="tokenpair">
                 <div class="token1 token"></div>
@@ -618,8 +631,6 @@
 
           <div class="card swapcard">
             <span class="badge badge-danger yield-badge">3x</span>
-            <a class="badge btn btn-danger yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(3)">Vote Up</a>
-
             <div class="card-body my-2">
               <div class="tokenpair">
                 <div class="token1 token"></div>
@@ -652,8 +663,6 @@
 
           <div class="card swapcard">
             <span class="badge badge-success yield-badge">3x</span>
-            <a class="badge btn btn-success yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(4)">Vote Up</a>
-
             <div class="card-body my-2">
               <div class="tokenpair">
                 <div class="token1 token"></div>
@@ -685,8 +694,6 @@
 
           <div class="card swapcard">
             <span class="badge badge-primary yield-badge">3x</span>
-            <a class="badge btn btn-primary yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(5)">Vote Up</a>
-
             <div class="card-body my-2">
               <div class="tokenpair">
                 <div class="token1 token"></div>
@@ -717,8 +724,7 @@
           </div>
 
           <div class="card swapcard">
-            <span class="badge badge-danger yield-badge">2x</span>
-            <a class="badge btn btn-danger yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(6)">Vote Up</a>
+            <span class="badge badge-danger yield-badge">2x</span>            
             <div class="card-body my-2">
               <div class="tokenpair">
                 <div class="token1 uni"></div>
@@ -749,8 +755,7 @@
           </div>
 
           <div class="card swapcard">
-            <span class="badge badge-success yield-badge">2x</span>
-            <a class="badge btn btn-success yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(7)">Vote Up</a>
+            <span class="badge badge-success yield-badge">2x</span>            
             <div class="card-body my-2">
               <div class="tokenpair">
                 <div class="token1 uni"></div>
@@ -781,8 +786,7 @@
           </div>
 
           <div class="card swapcard">
-            <span class="badge badge-primary yield-badge">2x</span>
-            <a class="badge btn btn-primary yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(8)">Vote Up</a>
+            <span class="badge badge-primary yield-badge">2x</span>            
             <div class="card-body my-2">
               <div class="tokenpair">
                 <div class="token1 uni"></div>
@@ -813,8 +817,7 @@
           </div>
 
           <div class="card swapcard">
-            <span class="badge badge-danger yield-badge">1x</span>
-            <a class="badge btn btn-danger yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(9)">Vote Up</a>
+            <span class="badge badge-danger yield-badge">1x</span>            
             <div class="card-body my-2">
               <div class="tokenpair">
                 <div class="token1 dai"></div>
@@ -845,8 +848,7 @@
           </div>
 
           <div class="card swapcard">
-            <span class="badge badge-success yield-badge">1x</span>
-            <a class="badge btn btn-success yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(10)">Vote Up</a>
+            <span class="badge badge-success yield-badge">1x</span>            
             <div class="card-body my-2">
               <div class="tokenpair">
                 <div class="token1 dai"></div>
@@ -877,8 +879,7 @@
           </div>
 
           <div class="card swapcard">
-            <span class="badge badge-primary yield-badge">1x</span>
-            <a class="badge btn btn-primary yield-badge-upgrade card-link" style="font-size: 16px;" onclick="vote(11)">Vote Up</a>
+            <span class="badge badge-primary yield-badge">1x</span>            
             <div class="card-body my-2">
               <div class="tokenpair">
                 <div class="token1 dai"></div>
@@ -909,6 +910,146 @@
           </div>
 
         </div>
+      </main>
+
+      <main role="main" class="inner cover game mb-5" style="display: none">
+
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="mt-4">            
+            <div class="col-12">
+              <div class="mt-4" style="width: 300px;">
+                <h1> Minority<br>Game </h1>
+                <p>Vote and win reward pool!</p>
+              </div>
+            </div>            
+          </div>  
+
+          <div class="mt-4">            
+            <div class="col-12">
+              <div class="card miniCard">            
+                <div class="row d-flex justify-content-center">
+                  <div>
+                    <img src="images/tip_jar.png" height="80"/>                
+                  </div>  
+    
+                  <div class="web3true hide">                                                                  
+                    <div class="card-body">
+                      <div class="hide web3true">                    
+                        <h6>Reward Pool:</h6>
+                        <h6 class="balanceReward"><span>-.----</span> ESPR</h6>              
+                      </div>
+                    </div>                                  
+                  </div>  
+                </div>                                  
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">            
+            <div class="col-12">
+              <div class="card miniCard">            
+                <div class="row d-flex justify-content-center">
+                  <div>
+                    <img src="images/logo_latte.png" height="80"/>                
+                  </div>  
+    
+                  <div class="web3true hide">                                                                  
+                    <div class="card-body">
+                      <div class="hide web3true">                    
+                        <h6>Your Balance:</h6>
+                        <h6 class="balancelatte"><span>-.----</span> LTTE</h6>              
+                      </div>
+                    </div>                                  
+                  </div>  
+                </div>                                  
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row d-flex justify-content-center">
+          <div class="mt-4">            
+            <div class="col-12">
+              <div class="card mainCard">
+                <span class="badge badge-danger yield-badge">Coming Soon</span>
+                <img src="images/arabica.png" height="100"/>
+                <h1 class="tokenName mb-3">Arabica</h1>
+
+                <div class="web3true hide">                                                                  
+                    <div class="card-body">
+                      <div class="hide web3true">                    
+                        <h6>Pool balance:</h6>
+                        <h6 class="tokenprice mb-4"><span>-.----</span> LTTE</h6>                    
+                        <a
+                          href="#"
+                          class="card-link btn-secondary btn-lg my-2"
+                          style="width: 200px;"
+                          onclick= "vote(0)"
+                        >
+                          Vote
+                        </a>                      
+                      </div>
+                    </div>                                      
+                </div>
+              </div>
+            </div>            
+          </div>  
+
+          <div class="mt-4">            
+            <div class="col-12">
+              <div class="card mainCard">
+                <span class="badge badge-danger yield-badge">Coming Soon</span>
+                <img src="images/robusta.png" height="100"/>
+                <h1 class="tokenName mb-3">Robusta</h1>
+
+                <div class="web3true hide">                                                                  
+                  <div class="card-body">
+                    <div class="hide web3true">                    
+                      <h6>Pool balance:</h6>
+                      <h6 class="tokenprice mb-4"><span>-.----</span> LTTE</h6>                    
+                      <a
+                        href="#"
+                        class="card-link btn-secondary btn-lg my-2"
+                        style="width: 200px;"
+                        onclick= "vote(1)"
+                      >
+                        Vote
+                      </a>                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">            
+            <div class="col-12">
+              <div class="card mainCard">
+                <span class="badge badge-danger yield-badge">Coming Soon</span>
+                <img src="images/liberica.png" height="100"/>
+                <h1 class="tokenName mb-3">Liberica</h1>
+
+                <div class="web3true hide">                                                                  
+                  <div class="card-body">
+                    <div class="hide web3true">                    
+                      <h6>Pool balance:</h6>
+                      <h6 class="tokenprice mb-4"><span>-.----</span> LTTE</h6>                    
+                      <a
+                        href="#"
+                        class="card-link btn-secondary btn-lg my-2"
+                        style="width: 200px;"
+                        onclick= "vote(2)"
+                      >
+                        Vote
+                      </a>                      
+                    </div>
+                  </div>                                      
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </main>
 
       <!-- <main role="main" class="inner cover tutorial text-dark" STYLE="DISPLAY:NONE">
