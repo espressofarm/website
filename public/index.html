@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Espresso.Farm</title>
+    <!-- CSS only -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="fonts/myFont.css" />
+    <meta name="viewport" content="width=500, initial-scale=1" />
+    <link rel="icon" href="images/logo.png" />
+    <!-- JS, Popper.js, and jQuery -->    
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://raw.githubusercontent.com/talmand/jquery-animate-numbers/master/jquery.animateNumbers.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <meta name="theme-color" content="#056674" />
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+    <script src="https://cdn.logwork.com/widget/countdown.js"></script>
+
+    <style>
+      body:not(.web3) .web3true {
+        display: none;
+      }
+      body{
+        background-image: url("images/bg.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center bottom;
+      }
+
+      .espresso .swapcard {
+        min-height: 175px;
+      }
+      .espresso .swapcard2 {
+        min-height: 115px;
+      }
+      .web3 .web3false {
+        display: none;
+      }
+
+      .espresso h2 {
+        font-weight: 900;
+        color: white;
+        text-transform: uppercase;
+        line-height: 41px;
+      }
+
+      h6 { 
+        font-size: 16px;
+      }
+
+      .pool h2 {
+        font-weight: 900;
+        color: white;
+        text-transform: uppercase;
+        line-height: 41px;
+      }
+      
+      /* * {
+        font-weight: 400 !important;
+      } */
+      .yield-badge {
+        position: absolute;
+        right: -10px;
+        top: -10px;
+        font-size: 20px;
+      }
+      body.approved .not-approved-spend {
+        display: none;
+      }
+      body:not(.approved) .approved-spend {
+        display: none;
+      }
+      
+      * {
+        font-family: "Gotham", Arial, Times New Roman !important;
+      }
+      
+      .tokenName {
+        font-family: "SignPainter", Arial, Times New Roman !important;
+      }
+
+      html {
+        height: 100%;
+        background-color: #fff;
+      }
+
+      .card {
+        border-radius: 53px;
+        background: linear-gradient(145deg, #612801, #742f01);
+        box-shadow:  5px 5px 10px #562301, 
+                    -5px -5px 10px #823501;        
+      }
+
+      .mainCard{
+        display: inline-block;
+        width: 220px;
+        height: 220px;            
+        padding-top: 40px;    
+      }
+
+      .swapcard {
+        display: inline-block;
+        width: 300px;
+        /* height: 240px; */
+        margin: 10px;
+        transition: 1s box-shadow;
+      }
+
+      .swapcardsmall {
+        display: inline-block;
+        width: 300px;
+        height: 100px;
+        margin: 10px;
+        transition: 1s box-shadow;
+      }
+
+      .swapcard2 {
+        display: inline-block;
+        width: 100%;
+        /* height: 240px; */
+        margin: 10px;
+        transition: 1s box-shadow;
+      }
+      .swapcard:hover,
+      .swapcard2:hover {
+        box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
+      }
+      .tokenpair {
+        margin-bottom: 15px;
+      }
+      .token1,
+      .token2 {
+        display: inline-block;
+        height: 50px;
+        width: 50px;
+        border-radius: 99px;
+        border: 3px solid #fff;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+        background: #000;
+        background-size: cover !important;
+      }
+      .token2 {
+        position: relative;
+        right: 8px;
+      }
+      .token1 {
+        position: relative;
+        left: 8px;
+        z-index: 99;
+      }
+      .bigtoken1,
+      .bigtoken2 {
+        display: inline-block;
+        height: 100px;
+        width: 100px;
+        border-radius: 99px;
+        border: 3px solid #fff;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+        background: #000;
+        background-size: cover !important;
+      }
+
+      .token {
+        background-image: url("images/logo.png");
+      }
+      .eth {
+        background-image: url("images/eth.png");
+      }
+      .usdc {
+        background-image: url("images/usdc.png");
+      }
+      .uni {
+        background-image: url("images/uni.png");
+      }
+      .dai {
+        background-image: url("images/dai.png");
+      }
+      .link {
+        background-image: url("images/linkCoin.png");
+      }
+      .yfi {
+        background-image: url("images/yfi.png");
+      }
+      /*
+ * Globals
+ */
+      /* Links */
+      a,
+      a:focus,
+      a:hover {
+        color: #fff;
+      }
+      /* Custom default button */
+      .btn-secondary {
+        min-width: 100;
+        background-color: #612801;
+        border-radius: 50px;
+        display: inline-block;
+        padding: 17px 0 12px;
+        text-decoration: none;
+        font-size: 15px;
+      }
+
+      .btn-secondary:hover,
+      .btn-secondary:focus {
+        color: #333;
+        text-shadow: none; /* Prevent inheritance from `body` */
+        background-color: #fff;
+        border: 0.05rem solid #fff;
+      }
+
+      /*
+ * Base structure
+ */
+      html {
+        height: 100%;
+      }
+      body {
+        min-height: 100%;
+        display: -ms-flexbox;
+        display: flex;
+        color: #fff;
+        padding-top: 20px;
+      }
+      .cover-container {
+        max-width: 50em;
+      }
+
+      .about .cover-container {
+        max-width: 50em;
+      }
+
+      .farms {
+        max-width: 80em;
+      }
+      /*
+ * Header
+ */
+      .masthead {
+        
+      }
+      .masthead-brand {
+        margin-bottom: 0;
+      }
+      .nav-masthead .nav-link {
+        padding: 0.25rem 0;
+        color: rgba(255, 255, 255, 1);
+        background-color: transparent;
+        border-bottom: 0.25rem solid transparent;
+      }
+      .nav-masthead .nav-link:hover,
+      .nav-masthead .nav-link:focus {
+        border-bottom-color: rgba(255, 255, 255, 1);
+      }
+      .nav-masthead .nav-link + .nav-link {
+        margin-left: 1rem;
+      }
+      .nav-masthead .active {
+        color: #000;
+        border-bottom-color: #000;
+      }
+      @media (min-width: 48em) {
+        .masthead-brand {
+          float: left;
+        }
+        .nav-masthead {
+          float: right;
+        }
+      }
+
+      /*
+ * Cover
+ */
+      .cover .btn-lg {
+        padding: 0.75rem 1.25rem;
+        font-weight: 700;
+      }
+
+      /*
+ * Footer
+ */
+      .mastfoot {
+        margin-top: 50px;
+        padding-top: 15px;
+        color: rgba(0, 0, 0, 1);
+        /* background-color: #fff; */
+      }
+    </style>
+
+    <script>
+      (function ($) {
+        $.fn.animateNumbers = function (stop, commas, duration, ease) {
+          return this.each(function () {
+            var $this = $(this);
+            var isInput = $this.is("input");
+            var start = parseInt(
+              isInput
+                ? $this.val().replace(/,/g, "")
+                : $this.text().replace(/,/g, "")
+            );
+            var regex = /(\d)(?=(\d\d\d)+(?!\d))/g;
+            commas = commas === undefined ? true : commas;
+
+            // number inputs can't have commas or it blanks out
+            if (isInput && $this[0].type === "number") {
+              commas = false;
+            }
+
+            $({ value: start }).animate(
+              { value: stop },
+              {
+                duration: duration === undefined ? 1000 : duration,
+                easing: ease === undefined ? "swing" : ease,
+                step: function () {
+                  isInput
+                    ? $this.val(Math.floor(this.value))
+                    : $this.text(Math.floor(this.value));
+                  if (commas) {
+                    isInput
+                      ? $this.val($this.val().replace(regex, "$1,"))
+                      : $this.text($this.text().replace(regex, "$1,"));
+                  }
+                },
+                complete: function () {
+                  if (
+                    parseInt($this.text()) !== stop ||
+                    parseInt($this.val()) !== stop
+                  ) {
+                    isInput ? $this.val(stop) : $this.text(stop);
+                    if (commas) {
+                      isInput
+                        ? $this.val($this.val().replace(regex, "$1,"))
+                        : $this.text($this.text().replace(regex, "$1,"));
+                    }
+                  }
+                },
+              }
+            );
+          });
+        };
+      })(jQuery);
+    </script>
+    <script src="main.js"></script>                
+  </head>
+  <body class="text-center">   
+    <div class="w-100 h-100 mx-auto">
+      <header class="masthead cover-container d-flex w-100 h-100 mx-md-auto">
+        <div class="inner">
+          <img src="images/WebName.png" width="200" class="masthead-brand" onclick="nav('espresso')"></img>
+          <nav class="nav nav-masthead justify-content-center mt-3 ml-5">
+            <a class="nav-link text-light" href="#espresso" onclick="nav('espresso')">Espresso</a>
+            <a class="nav-link text-light" href="#latte" onclick="nav('latte')">Latte</a>
+            <a class="nav-link text-light" href="#farm" onclick="nav('farms')"
+              >Farm & Trade</a
+            >
+            <!-- <a class="nav-link" href="#tutorial" onclick="nav('tutorial')"
+              >HOW TO FARM</a
+            > -->
+            <a class="nav-link text-light" 
+            href="https://medium.com/@charizard.farm" target="blank">About</a>            
+          </nav>
+        </div>
+      </header>
+
+      <main role="main" class="inner cover espresso mb-5">
+
+        <img src="images/logo.png" height="180" class="mt-3"/>
+        <h1 class="tokenName mb-5">Espresso</h1>
+
+          <div class="col-12">
+            <div class="web3true hide">                            
+              <div class="card mainCard">
+                
+                <div class="card-body">
+                  <div class="hide web3true">                    
+                    <h6>Token Price:</h6>
+                    <h6 class="tokenprice mb-4"><span>-.----</span> USD</h6>
+                  
+                    <h6>Balance:</h6>
+                    <h6 class="balance"><span>-.----</span> ESPR</h6>              
+                  </div>
+                </div>
+                                    
+              </div>              
+            </div>
+
+            <p class="lead web3false" >
+              <a href="#" class="btn btn-lg btn-secondary" onclick="connectWeb3()"
+                >CONNECT WALLET</a
+              >
+            </p>
+                                  
+          </div>
+      </main>
+
+      <main role="main" class="inner cover latte mb-5">
+
+        <div class="row d-flex justify-content-center">
+          <div>
+            <img src="images/logo.png" height="180" class="mt-3"/>
+            <h1 class="tokenName mb-5">Espresso</h1>
+          </div>
+            <img src="images/swap.png" height="120" class="mt-5"/>
+          <div>
+            <img src="images/logo_latte.png" height="180" class="mt-3"/>
+            <h1 class="tokenName mb-5">Latte</h1>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="web3true hide">                            
+            <div class="card mainCard">
+              
+              <div class="card-body">
+                <div class="hide web3true">                    
+                  <h6>Token Price:</h6>
+                  <h6 class="tokenprice mb-4"><span>-.----</span> USD</h6>
+                
+                  <h6>Balance:</h6>
+                  <h6 class="balance"><span>-.----</span> ESPR</h6>              
+                </div>
+              </div>
+                                  
+            </div>              
+          </div>
+
+          <p class="lead web3false" >
+            <a href="#" class="btn btn-lg btn-secondary" onclick="connectWeb3()"
+              >CONNECT WALLET</a
+            >
+          </p>
+                                
+        </div>
+      </main>
+
+      <main role="main" class="inner cover farms cover-container mx-auto" style="display: none">
+        <div class="row d-flex justify-content-center mt-3 mb-5">
+          <div class="card swapcard">
+            <span class="badge badge-danger yield-badge">6x</span>
+            <div class="card-body my-2">
+              <div class="tokenpair">
+                <div class="token1 token"></div>
+                <div class="token2 eth"></div>
+              </div>
+              <h5 class="card-subtitle mb-2">UNISWAP ESPR/ETH</h5>
+              
+              <h6 class="card-text apy0">
+                APY <span class="pool0yield">---.-%</span>
+              </h6>     
+
+              <a
+                href="#pool0"
+                onclick="nav('pool0')"
+                class="card-link btn btn-secondary btn-lg"
+              >
+                Farm
+              </a>
+              <a
+                href="#"
+                class="card-link btn btn-secondary btn-lg"
+                onclick="getlptoken(0)"
+              >
+                Trade
+              </a>
+
+              <!-- <h6 class="card-text mt-2">
+                Farming start @ <span class="block0start">-</span> Block
+              </h6>      -->
+            </div>
+          </div>
+
+          <div class="card swapcard">   
+            <span class="badge badge-danger yield-badge">6x</span>         
+            <div class="card-body my-2">
+              <div class="tokenpair">
+                <div class="token1 uni"></div>
+                <div class="token2 token"></div>
+              </div>
+              <h5 class="card-subtitle mb-2">UNISWAP UNI/ESPR</h5>
+        
+              <h6 class="card-text apy1">
+                APY <span class="pool1yield">---.-%</span>
+              </h6>
+              <a
+                href="#pool1"
+                onclick="nav('pool1')"
+                class="card-link btn btn-secondary btn-lg"
+              >
+                Farm
+              </a>
+              <a
+                href="#"
+                class="card-link btn btn-secondary btn-lg"
+                onclick="getlptoken(1)"
+              >
+                Trade
+            </a>
+            <!-- <h6 class="card-text mt-2">
+              Farming start @ <span class="block1start">-</span> Block
+            </h6>      -->
+            </div>
+          </div>
+
+          <div class="card swapcard">
+            <span class="badge badge-danger yield-badge">1.5x</span>
+            <div class="card-body my-2">
+              <div class="tokenpair">
+                <div class="token1 dai"></div>
+                <div class="token2 eth"></div>
+              </div>
+              <h5 class="card-subtitle mb-2">UNISWAP DAI/ETH</h5>
+              
+              <h6 class="card-text apy2">
+                APY <span class="pool2yield">---.-%</span>
+              </h6>
+            
+              <a
+                href="#pool2"
+                onclick="nav('pool2')"
+                class="card-link btn btn-secondary btn-lg"
+              >
+                Farm
+              </a>
+              <a
+                href="#"
+                class="card-link btn btn-secondary btn-lg"
+                onclick="getlptoken(2)"
+              >
+                Trade
+              </a>
+              <!-- <h6 class="card-text mt-2">
+                Farming start @ <span class="block2start">-</span> Block
+              </h6>      -->
+            </div>
+          </div>
+
+          <div class="card swapcard">
+            <span class="badge badge-danger yield-badge">1.5x</span>
+
+            <div class="card-body my-2">
+              <div class="tokenpair">
+                <div class="token1 usdc"></div>
+                <div class="token2 eth"></div>
+              </div>
+              <h5 class="card-subtitle mb-2">UNISWAP USDC/ETH</h5>
+              <h6 class="card-text apy3">
+                APY <span class="pool3yield">---.-%</span>
+              </h6>
+
+              <a
+                href="#pool3"
+                onclick="nav('pool3')"
+                class="card-link btn btn-secondary btn-lg"
+              >
+                Farm
+              </a>
+              <a
+                href="#"
+                class="card-link btn btn-secondary btn-lg"
+                onclick="getlptoken(3)"
+              >
+                Trade
+              </a> 
+              <!-- <h6 class="card-text mt-2">
+                Farming start @ <span class="block3start">-</span> Block
+              </h6>                                -->
+            </div>
+          </div>
+
+          <div class="card swapcard">
+            <span class="badge badge-danger yield-badge">2x</span>
+
+            <div class="card-body my-2">
+              <div class="tokenpair">
+                <div class="token1 link"></div>
+                <div class="token2 eth"></div>
+              </div>
+              <h5 class="card-subtitle mb-2">UNISWAP LINK/ETH</h5>              
+              <h6 class="card-text apy4">
+                APY <span class="pool5yield">---.-%</span>
+              </h6>
+              <a
+                href="#pool4"
+                onclick="nav('pool4')"
+                class="card-link btn btn-secondary btn-lg"
+              >
+                Farm
+              </a>
+              <a
+                href="#"
+                class="card-link btn btn-secondary btn-lg"
+                onclick="getlptoken(4)"
+              >
+                Trade
+              </a>
+              <!-- <h6 class="card-text mt-2">
+                Farming start @ <span class="block4start">-</span> Block
+              </h6>      -->
+            </div>
+          </div>
+
+          <div class="card swapcard">
+            <span class="badge badge-danger yield-badge">2x</span>
+
+            <div class="card-body my-2">
+              <div class="tokenpair">
+                <div class="token1 yfi"></div>
+                <div class="token2 eth"></div>
+              </div>
+              <h5 class="card-subtitle mb-2">UNISWAP YFII/ETH</h5>              
+              <h6 class="card-text apy5">
+                APY <span class="pool5yield">---.-%</span>
+              </h6>
+              <a
+                href="#pool5"
+                onclick="nav('pool5')"
+                class="card-link btn btn-secondary btn-lg"
+              >
+                Farm
+              </a>
+              <a
+                href="#"
+                class="card-link btn btn-secondary btn-lg"
+                onclick="getlptoken(5)"
+              >
+                Trade
+              </a>
+              <!-- <h6 class="card-text mt-2">
+                Farming start @ <span class="block5start">-</span> Block
+              </h6>      -->
+            </div>
+          </div>
+
+          <div class="card swapcard">
+            <span class="badge badge-danger yield-badge">3x</span>
+            <div class="card-body my-2">
+              <div class="tokenpair">
+                <div class="token1 uni"></div>
+                <div class="token2 eth"></div>
+              </div>
+              <h5 class="card-subtitle mb-2">UNISWAP UNI/ETH</h5>              
+              <h6 class="card-text apy6">
+                APY <span class="pool6yield">---.-%</span>
+              </h6>
+              <a
+                href="#pool6"
+                onclick="nav('pool6')"
+                class="card-link btn btn-secondary btn-lg"
+              >
+                Farm
+              </a>
+              <a
+                href="#"
+                class="card-link btn btn-secondary btn-lg"
+                onclick="getlptoken(6)"
+              >
+                Trade
+              </a>
+              <!-- <h6 class="card-text mt-2">
+                Farming start @ <span class="block6start">-</span> Block
+              </h6>      -->
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- <main role="main" class="inner cover tutorial text-dark" STYLE="DISPLAY:NONE">
+        <div class="mx-5 mb-5 p-5"> 
+          <h2 class="lead">HOW TO FARM</h2>
+          <br />
+          Hello crypto hunters around the world. Let me show you how to get ESPR and farm.<br />
+          You can check your ESPR balance and buy ESPR at uniswap.<br />
+          Our most beneficial pairing token to farm is ESPR/ETH.<br />
+          Follow the instruction to stake and claim your reward.<br />
+          if you need more information find us at :<br />
+          Telegram: <a href="https://t.me/minionfarm" target="blank" class="text-dark"> https://t.me/minionfarm</a><br />
+          Twitter: <a href="https://twitter.com/MinionFarm" target="blank" class="text-dark"> https://twitter.com/MinionFarm</a><br />
+          <br /><br />
+          <img src="images/tutorial1.jpeg" class="col-12">
+          <br /><br />
+          <img src="images/tutorial2.jpeg" class="col-12">
+          <br /><br />
+          <img src="images/tutorial3.jpeg" class="col-12">
+          <br /><br />
+          <img src="images/tutorial4.jpeg" class="col-12">
+        </div>
+      </main> -->
+      
+      <main role="main" class="inner cover pool mx-5 my-5" style="display: none">
+        <h2 class="cover-heading farmname">ESPR Farm</h2>
+        <p class="lead"></p>
+        <div class="row">
+          <div class="card rdyToClaimCard hide web3true col-md-12 col-12">
+            <div class="card-body">
+              <h6 class="card-subtitle my-3">Ready to Claim</h6>
+              <h3 class="card-text rewardbalance">-.----</h3>
+              
+              <a
+                href="#"
+                class="card-link btn btn-warning btn-lg"
+                onclick="claimReward()"
+                >Claim</a
+              >
+            </div>
+          </div>
+          <div class="card hide web3true col-md-6 col-12">
+            <div class="card-body">
+              <h6 class="card-subtitle my-3">Your wallet</h6>
+              <h3 class="card-text walletbalance">-.----</h3>
+              <h6 class="card-subtitle"><br/></h6>
+              <div class="not-approved-spend">
+                <a
+                  href="#"
+                  class="card-link btn btn-secondary btn-lg"
+                  onclick="approveSpend()"
+                  >Approve Spend</a
+                >
+              </div>
+              <div class="approved-spend">
+                <a
+                  href="#"
+                  class="card-link btn btn-secondary btn-lg"
+                  onclick="addToPool()"
+                  >STAKE</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="card hide web3true col-md-6 col-12">
+            <div class="card-body">
+              <h6 class="card-subtitle my-3">Staked token</h6>
+              <h3 class="card-text stakedbalance">-.----</h3>
+              <h6 class="card-subtitle">* 0.25% withdrawn fee</h6>
+              <a
+                href="#"
+                class="card-link btn btn-secondary btn-lg"
+                onclick="removeFromPool()"
+                >UNSTAKE</a
+              >
+            </div>
+          </div>
+          <div class="hide web3true col-md-12 col-12">
+            <div class="card-body">
+              <a
+                href="#"
+                class="card-link btn btn-success btn-lg"
+                onclick="getlptoken()"
+                >Get LP Token To Stake</a
+              >
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="mastfoot fixed-bottom">
+        <div class="inner">
+          <p class="d-flex justify-content-around">
+            <a
+              href="#"
+              target="_blank"
+              >ESPR Token Contract</a
+            >
+
+            <a
+              href="#"
+              target="_blank"
+              >ESPR-ETH UNISWAP Pool</a
+            >
+
+            <a href="#" target="_blank">Telegram</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
