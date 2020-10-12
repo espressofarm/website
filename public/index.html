@@ -489,7 +489,7 @@
         <div class="card swapcardsmall">          
           <div class="card-body">
             <h3 class="tokenName mb-2">Latte Price</h3>
-            <h6 class="balance"><span>-.----</span> ESPR</h6>
+            <h6 class="lattePrice"><span>-.----</span> ESPR</h6>
           </div>
         </div>
 
@@ -961,7 +961,7 @@
                     <div class="card-body">
                       <div class="hide web3true">                    
                         <h6>Total Vote:</h6>
-                        <h6 class="tokenprice mb-4"><span>-.----</span> LTTE</h6>                    
+                        <h6 class="redPool mb-4"><span>-.----</span> LTTE</h6>                    
                         <a
                           href="#"
                           class="card-link btn-secondary btn-lg my-2"
@@ -988,7 +988,7 @@
                   <div class="card-body">
                     <div class="hide web3true">                    
                       <h6>Total Vote:</h6>
-                      <h6 class="tokenprice mb-4"><span>-.----</span> LTTE</h6>                    
+                      <h6 class="bluePool mb-4"><span>-.----</span> LTTE</h6>                    
                       <a
                         href="#"
                         class="card-link btn-secondary btn-lg my-2"
@@ -1015,7 +1015,7 @@
                   <div class="card-body">
                     <div class="hide web3true">                    
                       <h6>Total Vote:</h6>
-                      <h6 class="tokenprice mb-4"><span>-.----</span> LTTE</h6>                    
+                      <h6 class="greenPool mb-4"><span>-.----</span> LTTE</h6>                    
                       <a
                         href="#"
                         class="card-link btn-secondary btn-lg my-2"
@@ -1101,7 +1101,7 @@
                     <div class="card-body">
                       <div class="hide web3true">                    
                         <h6>Total Vote:</h6>
-                        <h6 class="tokenprice mb-4"><span>-.----</span> LTTE</h6>                    
+                        <h6 class="arabicaPool mb-4"><span>-.----</span> LTTE</h6>                    
                         <a
                           href="#"
                           class="card-link btn-secondary btn-lg my-2"
@@ -1128,7 +1128,7 @@
                   <div class="card-body">
                     <div class="hide web3true">                    
                       <h6>Total Vote:</h6>
-                      <h6 class="tokenprice mb-4"><span>-.----</span> LTTE</h6>                    
+                      <h6 class="robustaPool mb-4"><span>-.----</span> LTTE</h6>                    
                       <a
                         href="#"
                         class="card-link btn-secondary btn-lg my-2"
@@ -1155,7 +1155,7 @@
                   <div class="card-body">
                     <div class="hide web3true">                    
                       <h6>Total Vote:</h6>
-                      <h6 class="tokenprice mb-4"><span>-.----</span> LTTE</h6>                    
+                      <h6 class="libericaPool mb-4"><span>-.----</span> LTTE</h6>                    
                       <a
                         href="#"
                         class="card-link btn-secondary btn-lg my-2"
@@ -1196,11 +1196,11 @@
         </div>
       </main> -->
       
-      <main role="main" class="inner cover pool mx-5 my-5" style="display: none">
+      <main role="main" class="inner cover pool mx-5 mt-4 mb-5" style="display: none">
         <h2 class="cover-heading farmname">ESPR Farm</h2>
         <p class="lead"></p>
-        <div class="row">
-          <div class="card rdyToClaimCard hide web3true col-md-12 col-12">
+        
+          <div class="hide web3true col-md-12 col-12">
             <div class="card-body">
               <h6 class="card-subtitle my-3">Ready to Claim</h6>
               <h3 class="card-text rewardbalance">-.----</h3>
@@ -1213,42 +1213,47 @@
               >
             </div>
           </div>
-          <div class="card hide web3true col-md-6 col-12">
-            <div class="card-body">
-              <h6 class="card-subtitle my-3">Your wallet</h6>
-              <h3 class="card-text walletbalance">-.----</h3>
-              <h6 class="card-subtitle"><br/></h6>
-              <div class="not-approved-spend">
-                <a
-                  href="#"
-                  class="card-link btn btn-secondary btn-lg"
-                  onclick="approveSpend()"
-                  >Approve Spend</a
-                >
+          <div class="row justify-content-center">
+          <div class="card hide web3true col-lg-8">
+            <div class="row">
+              <div class="col-6 card-body">
+                <h6 class="card-subtitle my-3">Your wallet</h6>
+                <h3 class="card-text walletbalance">-.----</h3>
+                <h6 class="card-subtitle"><br/></h6>
+                <div class="not-approved-spend">
+                  <a
+                    href="#"
+                    class="card-link btn btn-secondary btn-lg"
+                    onclick="approveSpend()"
+                    >Approve Spend</a
+                  >
+                </div>
+                <div class="approved-spend">
+                  <a
+                    href="#"
+                    class="card-link btn btn-secondary btn-lg"
+                    onclick="addToPool()"
+                    >STAKE</a
+                  >
+                </div>
               </div>
-              <div class="approved-spend">
-                <a
-                  href="#"
-                  class="card-link btn btn-secondary btn-lg"
-                  onclick="addToPool()"
-                  >STAKE</a
-                >
+
+              <div class="col-6">
+                <div class="card-body">
+                  <h6 class="card-subtitle my-3">Staked token</h6>
+                  <h3 class="card-text stakedbalance">-.----</h3>
+                  <h6 class="card-subtitle">* 0.25% withdrawn fee</h6>
+                  <a
+                    href="#"
+                    class="card-link btn btn-secondary btn-lg"
+                    onclick="removeFromPool()"
+                    >UNSTAKE</a
+                  >
+                </div>
               </div>
             </div>
           </div>
-          <div class="card hide web3true col-md-6 col-12">
-            <div class="card-body">
-              <h6 class="card-subtitle my-3">Staked token</h6>
-              <h3 class="card-text stakedbalance">-.----</h3>
-              <h6 class="card-subtitle">* 0.25% withdrawn fee</h6>
-              <a
-                href="#"
-                class="card-link btn btn-secondary btn-lg"
-                onclick="removeFromPool()"
-                >UNSTAKE</a
-              >
-            </div>
-          </div>
+          
           <div class="hide web3true col-md-12 col-12">
             <div class="card-body">
               <a

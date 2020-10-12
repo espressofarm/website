@@ -10,11 +10,13 @@ var web3 = new Web3(
   
   var farmingAddress = "0x"; //farming address
   const tokenAddress = "0x"; // token
+  const tokenLatteAddress = "0x"; // token Latte
   const uni1 = "0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc"; // USDC
 
   var ethconnected = false;
   var ethaddress = "0x";
   var balance = 0;
+  var balanceLatte = 0;
   var currentPageToken = "0x";
   var currentPagePoolID = 0;
   var currentPageWalletBalance = 0;
@@ -258,7 +260,8 @@ var web3 = new Web3(
 
   var prices = {
     tokenusd: -1,
-    tokeneth: -1,
+    tokeneth: -1,    
+    latteusd: -1,
     ethusd: -1,
   };
 
@@ -744,7 +747,21 @@ var pools = [
         balance = result;
       });
     });
+
+    var contract = new web3.eth.Contract(erc20ABI, tokenLatteAddress);
+    contract.methods.balanceOf(address).call(function (error, result) {
+      contract.methods.decimals().call(function (error, d) {
+        result = result / Math.pow(10, d);
+        if (isNaN(result)) {
+          result = 0;
+        }
+  
+        $(".balancelatte").text(result.toFixedSpecial(2) + " LTTE");
+        balance = result;
+      });
+    });
   }
+  
   function hidepages() {
     $("main").hide();
   }
@@ -923,9 +940,15 @@ var pools = [
   }
   
   function updatePrice(p) {
-    $(".tokenprice").text(p.toFixed(4) + 'USD');    
+    $(".tokenprice").text(p.toFixed(4) + ' USD');    
     updateYield();
   }
+  
+  function updateLattePrice(p) {
+    $(".tokenlatteprice").text(p.toFixed(4) + ' USD');
+    updateYield();
+  }
+
 
   function getlptoken(id) {
     if (typeof id === "undefined") {
@@ -958,5 +981,5 @@ var pools = [
   
   setInterval(function () {
     initpooldata(currentPagePoolID);
-  }, 15000);
+  }, 2000);
   
