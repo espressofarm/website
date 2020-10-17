@@ -547,27 +547,27 @@ var web3 = new Web3(
 //contract,name,url,weight,yield
 var pools = [
   [
-    "0x",
+    "0xe3da716b710492ab2939fba095d2d1c747855d95",
     "UNISWAP ESPR/ETH RED",
-    "https://uniswap.info/pair/0x",
+    "https://info.uniswap.org/pair/0xe3da716b710492ab2939fba095d2d1c747855d95",
     6,
     0,
     0,
     "-"
   ],
   [
-    "0x",
+    "0xe3da716b710492ab2939fba095d2d1c747855d95",
     "UNISWAP ESPR/ETH GREEN",
-    "https://uniswap.info/pair/0x",
+    "https://uniswap.info/pair/0xe3da716b710492ab2939fba095d2d1c747855d95",
     6,
     0,
     0,
     "-"
   ],
   [
-    "0x",
+    "0xe3da716b710492ab2939fba095d2d1c747855d95",
     "UNISWAP ESPR/ETH BLUE",
-    "https://uniswap.info/pair/0x",
+    "https://uniswap.info/pair/0xe3da716b710492ab2939fba095d2d1c747855d95",
     6,
     0,
     0,
