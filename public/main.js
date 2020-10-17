@@ -8,8 +8,8 @@ var web3 = new Web3(
   const BN = web3.utils.BN;
   
   var farmingAddress = "0x"; //farming address
-  const tokenAddress = "0x"; // token
-  const tokenLatteAddress = "0x"; // token Latte
+  const tokenAddress = "0x31396D01409c9B6510E8245f768d378089988901"; // token
+  const tokenLatteAddress = "0x013a505d2d9842d9ef33e2413e5565a93a7c9431"; // token Latte
   const uni1 = "0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc"; // USDC
 
   var ethconnected = false;
