@@ -1,7 +1,6 @@
 // note: USDT, USDC decimal = 6
 var web3 = new Web3(
-    new Web3.providers.HttpProvider(
-      // "https://ropsten.infura.io/v3/904542f7796d484b8288ca2053c9399f"
+    new Web3.providers.HttpProvider(      
       "https://mainnet.infura.io/v3/904542f7796d484b8288ca2053c9399f"
     )
   );
@@ -154,7 +153,7 @@ var web3 = new Web3(
   ];
 
   const farmABI = [
-    {
+    {      
       inputs: [
         {
           internalType: "uint256",
@@ -256,12 +255,292 @@ var web3 = new Web3(
       stateMutability: "nonpayable",
       type: "function",
     },
+    {
+      inputs: [],
+      name: "getExchangeRateToken",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "_amount",
+          type: "uint256",
+        }
+      ],
+      name: "exchange",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "_amount",
+          type: "uint256",
+        },
+        {
+          internalType: "uint256",
+          name: "_groupId",
+          type: "uint256",
+        },
+      ],
+      name: "votePool",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "_pid",
+          type: "uint256",
+        },        
+      ],
+      name: "getPoolVote",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "_pid",
+          type: "uint256",
+        },        
+      ],
+      name: "getPrevPoolVote",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [],
+      name: "getAmountMinorityRewardPool",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "_gid",
+          type: "uint256",
+        },        
+      ],
+      name: "getMinorityTotalVote",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "address",
+          name: "_user",
+          type: "address",
+        },        
+      ],
+      name: "pendingMinorityEspresso",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "_gid",
+          type: "uint256",
+        },        
+        {
+          internalType: "address",
+          name: "_account",
+          type: "address",
+        },        
+      ],
+      name: "getMinorityVote",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "_amount",
+          type: "uint256",
+        },
+        {
+          internalType: "uint256",
+          name: "_groupId",
+          type: "uint256",
+        },
+      ],
+      name: "voteMinority",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      inputs: [],
+      name: "withdrawMinorityReward",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      inputs: [],
+      name: "getStartMinorityBlock",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        }
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [],
+      name: "getEndMinorityBlock",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        }
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "_gid",
+          type: "uint256",
+        }
+      ],
+      name: "getMinorityPrevTotalVote",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        }
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [],
+      name: "getMinorityWinner",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        }
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [],
+      name: "getStartVoteBlock",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        }
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [],
+      name: "getEndVoteBlock",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        }
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [],
+      name: "getPoolWinner",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        }
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
   ];
 
   var prices = {
     tokenusd: -1,
     tokeneth: -1,    
     latteusd: -1,
+    lattertoken: -1,
     ethusd: -1,
   };
 
@@ -748,9 +1027,9 @@ var pools = [
       });
     });
 
-    var contract = new web3.eth.Contract(erc20ABI, tokenLatteAddress);
-    contract.methods.balanceOf(address).call(function (error, result) {
-      contract.methods.decimals().call(function (error, d) {
+    var contract1 = new web3.eth.Contract(erc20ABI, tokenLatteAddress);
+    contract1.methods.balanceOf(address).call(function (error, result) {
+      contract1.methods.decimals().call(function (error, d) {
         result = result / Math.pow(10, d);
         if (isNaN(result)) {
           result = 0;
@@ -760,6 +1039,27 @@ var pools = [
         balance = result;
       });
     });
+
+    var ctx0 = new web3.eth.Contract(farmABI, farmingAddress); // usdc-eth    
+    ctx0.methods.pendingMinorityEspresso(ethaddress).call(function(err, result) {       
+      result = result / Math.pow(10, 18);
+      $(".balanceReward").text(result.toFixedSpecial(2) + ' ESPR');
+    });
+
+    var ctx1 = new web3.eth.Contract(farmABI, farmingAddress); // usdc-eth
+    ctx1.methods.getMinorityVote(0, ethaddress).call(function(err, result) {
+      $(".yourArabicaPool").text(result + ' LTTE');
+    });
+
+    var ctx2 = new web3.eth.Contract(farmABI, farmingAddress); // usdc-eth
+    ctx2.methods.getMinorityVote(1, ethaddress).call(function(err, result) {
+      $(".yourRobustaPool").text(result + ' LTTE');
+    });
+
+    var ctx3 = new web3.eth.Contract(farmABI, farmingAddress); // usdc-eth
+    ctx3.methods.getMinorityVote(2, ethaddress).call(function(err, result) {
+      $(".yourLibericaPool").text(result + ' LTTE');
+    });    
   }
   
   function hidepages() {
@@ -833,7 +1133,31 @@ var pools = [
   }
   
   function vote(id) {
-    alert("Coming Soon");
+    var contract = new web3.eth.Contract(farmABI, farmingAddress);
+    var amount = prompt("Insert how many Latte you want to use:");     
+    contract.methods
+      .votePool(
+        (amount * Math.pow(10, 18)).toFixedSpecial(0),
+        id
+      )
+      .send({ from: ethaddress }, function (err, transactionHash) {
+        console.log("Error: ", err);
+        console.log(transactionHash);
+      });
+  }
+
+  function voteMinority(id) {
+    var contract = new web3.eth.Contract(farmABI, farmingAddress);
+    var amount = prompt("Insert how many Latte you want to use:");    
+    contract.methods
+      .voteMinority(
+        (amount * Math.pow(10, 18)).toFixedSpecial(0),
+        id
+      )
+      .send({ from: ethaddress }, function (err, transactionHash) {
+        console.log("Error: ", err);
+        console.log(transactionHash);
+      });
   }
 
   function approveSpend() {
@@ -861,7 +1185,7 @@ var pools = [
       "Amount to stake",
       (currentPageWalletBalance - 1000000) / Math.pow(10, 18)
     );
-  
+
     contract.methods
       .deposit(
         currentPagePoolID,
@@ -891,13 +1215,36 @@ var pools = [
         console.log(transactionHash);
       });
   }
+  function getExchangeRate() {    
+    var contract = new web3.eth.Contract(farmABI, farmingAddress);
+    contract.methods
+      .getExchangeRateToken()
+      .call(function (error, result) {            
+        lattePrice = (result);
+        console.log(error, result);
+        $(".lattePrice").text(lattePrice + ' ESPR');
+      });
+  }
+  function exchange() {    
+    var contract = new web3.eth.Contract(farmABI, farmingAddress);
+    var amount = prompt("Insert how many Latte you want:");    
+    contract.methods.getExchangeRateToken().call(function (err, result1) {
+      amount = amount * result1;      
+      contract.methods
+      .exchange((amount * Math.pow(10, 18)).toFixedSpecial(0))
+      .send({ from: ethaddress }, function (err, transactionHash) {
+        console.log(err);
+        console.log(transactionHash);
+      });
+    });
+  }
   function getUniswapPrice() {
     var ctx0 = new web3.eth.Contract(uniswapABI, pools[0][0]); // token-eth
-    var ctx1 = new web3.eth.Contract(uniswapABI, uni1); // usdc-eth
+    var ctx1 = new web3.eth.Contract(uniswapABI, uni1); // usdc-eth    
     try {
       ctx0.methods.getReserves().call(function (err, result1) {
         console.log(err, result1);
-        ctx1.methods.getReserves().call(function (err, result2) {
+        ctx1.methods.getReserves().call(function (err, result2) {          
           var tokeneth = result1["_reserve1"] / result1["_reserve0"];
           prices["tokeneth"] = tokeneth;
   
@@ -916,6 +1263,40 @@ var pools = [
       console.error(e);
     }
   }
+  function getUniswapLattePrice() {
+    var ctx0 = new web3.eth.Contract(uniswapABI, pools[0][0]); // token-eth
+    var ctx1 = new web3.eth.Contract(uniswapABI, uni1); // usdc-eth
+    var ctx2 = new web3.eth.Contract(farmABI, farmingAddress); // usdc-eth
+    try {
+      ctx0.methods.getReserves().call(function (err, result1) {
+        console.log(err, result1);
+        ctx1.methods.getReserves().call(function (err, result2) {          
+          ctx2.methods.getExchangeRateToken().call(function(err, result3) {
+            var tokeneth = result1["_reserve1"] / result1["_reserve0"];
+            prices["tokeneth"] = tokeneth;
+    
+            var ethusd =
+              (result2["_reserve0"] / result2["_reserve1"]) * Math.pow(10, 18 - 6); // cause USDC uses 6 decimal
+            prices["ethusd"] = ethusd;
+    
+            var tokenusd = tokeneth * ethusd;
+            prices["tokenusd"] = tokenusd;
+
+            var lattetoken = result3;
+            prices["lattetoken"] = lattetoken;
+
+            var latteusd = lattetoken * tokenusd;
+            prices["latteusd"] = latteusd;
+                
+            updateLattePrice(prices["latteusd"]);
+          });
+        });
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
 
   function loadedPool() {
     loadedpools++;
@@ -949,6 +1330,231 @@ var pools = [
     updateYield();
   }
 
+  function getVoteTotal() {
+    var ctx0 = new web3.eth.Contract(farmABI, farmingAddress); // usdc-eth
+    ctx0.methods.getPoolVote(0).call(function(err, result) {
+      $(".redPool").text(result + ' LTTE');
+    });
+    
+    ctx0.methods.getPoolVote(1).call(function(err, result) {
+      $(".greenPool").text(result + ' LTTE');
+    });
+    
+    ctx0.methods.getPoolVote(2).call(function(err, result) {
+      $(".bluePool").text(result + ' LTTE');
+    });
+
+    ctx0.methods.getPrevPoolVote(0).call(function(err, result) {
+      $(".prevRedPool").text(result + ' LTTE');
+    });
+    
+    ctx0.methods.getPrevPoolVote(1).call(function(err, result) {
+      $(".prevGreenPool").text(result + ' LTTE');
+    });
+    
+    ctx0.methods.getPrevPoolVote(2).call(function(err, result) {
+      $(".prevBluePool").text(result + ' LTTE');
+    });
+
+    ctx0.methods.getStartVoteBlock().call(function(err, result) {
+      $(".startvoteblock").text('#' + result);
+    });
+    
+    ctx0.methods.getEndVoteBlock().call(function(err, result) {
+      $(".endvoteblock").text('#' + result);
+    });
+
+    ctx0.methods.getPoolWinner().call(function(err, result) {      
+      var x = document.getElementById("redWin");
+      var y = document.getElementById("greenWin");
+      var z = document.getElementById("blueWin");
+      if (result == 0) {        
+        x.style.display = "block";
+        y.style.display = "none";
+        z.style.display = "none";
+
+        pools[0][3] = 12;
+        pools[1][3] = 6;
+        pools[2][3] = 6;
+
+        pools[3][3] = 6;
+        pools[4][3] = 3;
+        pools[5][3] = 3;
+
+        pools[6][3] = 4;
+        pools[7][3] = 2;
+        pools[8][3] = 2;
+
+        pools[9][3] = 2;
+        pools[10][3] = 1;
+        pools[11][3] = 1;
+      } else if (result == 1)
+      {        
+        x.style.display = "none";
+        y.style.display = "block";
+        z.style.display = "none";
+
+        pools[0][3] = 6;
+        pools[1][3] = 12;
+        pools[2][3] = 6;
+
+        pools[3][3] = 3;
+        pools[4][3] = 6;
+        pools[5][3] = 3;
+
+        pools[6][3] = 2;
+        pools[7][3] = 4;
+        pools[8][3] = 2;
+
+        pools[9][3] = 1;
+        pools[10][3] = 2;
+        pools[11][3] = 1;
+
+      } else if (result == 2)
+      {        
+        x.style.display = "none";
+        y.style.display = "none";
+        z.style.display = "block";
+
+        pools[0][3] = 6;
+        pools[1][3] = 6;
+        pools[2][3] = 12;
+
+        pools[3][3] = 3;
+        pools[4][3] = 3;
+        pools[5][3] = 6;
+
+        pools[6][3] = 2;
+        pools[7][3] = 2;
+        pools[8][3] = 4;
+
+        pools[9][3] = 1;
+        pools[10][3] = 1;
+        pools[11][3] = 2;
+      } else {           
+        x.style.display = "none";
+        y.style.display = "none";
+        z.style.display = "none";  
+        
+        pools[0][3] = 6;
+        pools[1][3] = 6;
+        pools[2][3] = 6;
+
+        pools[3][3] = 3;
+        pools[4][3] = 3;
+        pools[5][3] = 3;
+
+        pools[6][3] = 2;
+        pools[7][3] = 2;
+        pools[8][3] = 2;
+
+        pools[9][3] = 1;
+        pools[10][3] = 1;
+        pools[11][3] = 1;
+      }
+
+      $(".badge0").text(pools[0][3] + 'X');
+      $(".badge1").text(pools[1][3] + 'X');
+      $(".badge2").text(pools[2][3] + 'X');
+      $(".badge3").text(pools[3][3] + 'X');
+      $(".badge4").text(pools[4][3] + 'X');
+      $(".badge5").text(pools[5][3] + 'X');
+      $(".badge6").text(pools[6][3] + 'X');
+      $(".badge7").text(pools[7][3] + 'X');
+      $(".badge8").text(pools[8][3] + 'X');
+      $(".badge9").text(pools[9][3] + 'X');
+      $(".badge10").text(pools[10][3] + 'X');
+      $(".badge11").text(pools[11][3] + 'X');
+
+
+    });    
+
+    
+  }
+
+  function getMinorityTotal() {
+    var ctx0 = new web3.eth.Contract(farmABI, farmingAddress); // usdc-eth
+    ctx0.methods.getMinorityTotalVote(0).call(function(err, result) {
+      $(".arabicaPool").text(result + ' LTTE');
+    });
+
+    ctx0.methods.getMinorityPrevTotalVote(0).call(function(err, result) {
+      $(".prevArabicaPool").text(result + ' LTTE');
+    });
+    
+    ctx0.methods.getMinorityWinner().call(function(err, result) {      
+      var x = document.getElementById("arabicaWin");
+      var y = document.getElementById("robustaWin");
+      var z = document.getElementById("libericaWin");
+      if (result == 0) {        
+        x.style.display = "block";
+        y.style.display = "none";
+        z.style.display = "none";
+      } else if (result == 1)
+      {        
+        x.style.display = "none";
+        y.style.display = "block";
+        z.style.display = "none";
+      } else if (result == 2)
+      {        
+        x.style.display = "none";
+        y.style.display = "none";
+        z.style.display = "block";
+      } else {           
+        x.style.display = "none";
+        y.style.display = "none";
+        z.style.display = "none";        
+      }
+    });    
+    
+    ctx0.methods.getMinorityTotalVote(1).call(function(err, result) {
+      $(".robustaPool").text(result + ' LTTE');
+    });
+
+    ctx0.methods.getMinorityPrevTotalVote(1).call(function(err, result) {
+      $(".prevRobustaPool").text(result + ' LTTE');
+    });
+    
+    ctx0.methods.getMinorityTotalVote(2).call(function(err, result) {
+      $(".libericaPool").text(result + ' LTTE');
+    });    
+
+    ctx0.methods.getMinorityPrevTotalVote(2).call(function(err, result) {
+      $(".prevLibericaPool").text(result + ' LTTE');
+    });
+    
+    ctx0.methods.getAmountMinorityRewardPool().call(function(err, result) {      
+      $(".balanceJackpot").text(result / Math.pow(10,18) + ' ESPR');
+    });
+    
+    ctx0.methods.getStartMinorityBlock().call(function(err, result) {            
+      $(".startminorityblock").text('#' + result);
+    });
+    
+    ctx0.methods.getEndMinorityBlock().call(function(err, result) {      
+      $(".endminorityblock").text('#' + result);
+    });    
+
+    web3.eth.getBlockNumber(function(error, result){
+      if(!error){
+        $(".currentBlock").text('#' + result);
+      }
+      else
+        $(".currentBlock").text('# -');
+  });
+
+  }
+
+  function removeMinorityReward() {
+    var contract = new web3.eth.Contract(farmABI, farmingAddress);    
+  
+    contract.methods
+    .withdrawMinorityReward()
+    .send({ from: ethaddress }, function (err, transactionHash) {
+      //some code
+      console.log(transactionHash);
+    });      
+  }
 
   function getlptoken(id) {
     if (typeof id === "undefined") {
@@ -957,6 +1563,8 @@ var pools = [
       window.open(pools[id][2]);
     }
   }
+
+
   function init() {
     connectWeb3();
   }
@@ -978,8 +1586,16 @@ var pools = [
     return str;
   };
   getUniswapPrice();
+  getExchangeRate();
+  getVoteTotal();
+  getMinorityTotal();
   
   setInterval(function () {
     initpooldata(currentPagePoolID);
+    getUniswapPrice();
+    getExchangeRate();
+    getVoteTotal();
+    getMinorityTotal();
+    updateConnectStatus();
   }, 2000);
   
