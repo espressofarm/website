@@ -1358,11 +1358,19 @@ var pools = [
     });
 
     ctx0.methods.getStartVoteBlock().call(function(err, result) {
-      // $(".startvoteblock").text('#' + result);
+      if(
+        result == "3963877391197344453575983046348115674221700746820753546331534351508065746944") {                
+      } else {
+        $(".startvoteblock").text('#' + result);
+      }
     });
     
     ctx0.methods.getEndVoteBlock().call(function(err, result) {
-      // $(".endvoteblock").text('#' + result);
+      if(
+        result == "3963877391197344453575983046348115674221700746820753546331534351508065746944") {                
+      } else {
+        $(".endvoteblock").text('#' + result);
+      }
     });
 
     ctx0.methods.getPoolWinner().call(function(err, result) {      
@@ -1529,11 +1537,19 @@ var pools = [
     });
     
     ctx0.methods.getStartMinorityBlock().call(function(err, result) {            
-      // $(".startminorityblock").text('#' + result);
+      if(
+        result == "3963877391197344453575983046348115674221700746820753546331534351508065746944") {                
+      } else {
+        $(".startminorityblock").text('#' + result);
+      }
     });
     
     ctx0.methods.getEndMinorityBlock().call(function(err, result) {      
-      // $(".endminorityblock").text('#' + result);
+      if(
+        result == "3963877391197344453575983046348115674221700746820753546331534351508065746944") {                
+      } else {
+        $(".endminorityblock").text('#' + result);
+      }
     });    
 
     web3.eth.getBlockNumber(function(error, result){
