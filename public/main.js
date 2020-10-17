@@ -7,9 +7,9 @@ var web3 = new Web3(
 
   const BN = web3.utils.BN;
   
-  var farmingAddress = "0x"; //farming address
-  const tokenAddress = "0x"; // token
-  const tokenLatteAddress = "0x"; // token Latte
+  var farmingAddress = "0x20cAC56EA5A7F670ae1afbE41d0B7BA07B58dE21"; //farming address
+  const tokenAddress = "0x63DF8a7F806e0704A532f140816f4022589c9040"; // token
+  const tokenLatteAddress = "0xDa67Fc2c18Ce45c6f813df8a9D81604db810DC5f"; // token Latte
   const uni1 = "0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc"; // USDC
 
   var ethconnected = false;
@@ -547,27 +547,27 @@ var web3 = new Web3(
 //contract,name,url,weight,yield
 var pools = [
   [
-    "0x",
+    "0x08506C161380506BAd502D75801078b5663e55E5",
     "UNISWAP ESPR/ETH RED",
-    "https://uniswap.info/pair/0x",
+    "https://uniswap.info/pair/0x08506C161380506BAd502D75801078b5663e55E5",
     6,
     0,
     0,
     "-"
   ],
   [
-    "0x",
+    "0x08506C161380506BAd502D75801078b5663e55E5",
     "UNISWAP ESPR/ETH GREEN",
-    "https://uniswap.info/pair/0x",
+    "https://uniswap.info/pair/0x08506C161380506BAd502D75801078b5663e55E5",
     6,
     0,
     0,
     "-"
   ],
   [
-    "0x",
+    "0x08506C161380506BAd502D75801078b5663e55E5",
     "UNISWAP ESPR/ETH BLUE",
-    "https://uniswap.info/pair/0x",
+    "https://uniswap.info/pair/0x08506C161380506BAd502D75801078b5663e55E5",
     6,
     0,
     0,
