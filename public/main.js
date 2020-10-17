@@ -580,7 +580,7 @@ var pools = [
     3,
     0,
     0,
-    "11074737"
+    "11074617"
   ],
   [
     "0x",
@@ -589,7 +589,7 @@ var pools = [
     3,
     0,
     0,
-    "11074737"
+    "11074617"
   ],
   [
     "0x",
@@ -598,7 +598,7 @@ var pools = [
     3,
     0,
     0,
-    "11074737"
+    "11074617"
   ],
   [
     "0xd3d2e2692501a5c9ca623199d38826e513033a17",
@@ -1001,6 +1001,7 @@ var pools = [
     $(".block9start").text(pools[9][9]);
     $(".block10start").text(pools[10][10]);
     $(".block11start").text(pools[11][11]);
+
     getBalance(ethaddress);
   }
   function getSupply() {
