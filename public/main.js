@@ -7,7 +7,7 @@ var web3 = new Web3(
 
   const BN = web3.utils.BN;
   
-  var farmingAddress = "0x"; //farming address
+  var farmingAddress = "0x7e2de505c3ca00bae1aad529616e0e309d6180be"; //farming address
   const tokenAddress = "0x31396D01409c9B6510E8245f768d378089988901"; // token
   const tokenLatteAddress = "0x013a505d2d9842d9ef33e2413e5565a93a7c9431"; // token Latte
   const uni1 = "0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc"; // USDC
@@ -574,27 +574,27 @@ var pools = [
     "11074617"
   ],
   [
-    "0x",
+    "0x0d4DA345ce8c07627d5D7916754E45af17a4913B",
     "UNISWAP ESPR/USDT RED",
-    "https://uniswap.info/pair/0x",
+    "https://uniswap.info/pair/0x0d4DA345ce8c07627d5D7916754E45af17a4913B",
     3,
     0,
     0,
     "11074617"
   ],
   [
-    "0x",
+    "0x0d4DA345ce8c07627d5D7916754E45af17a4913B",
     "UNISWAP ESPR/USDT GREEN",
-    "https://uniswap.info/pair/0x",
+    "https://uniswap.info/pair/0x0d4DA345ce8c07627d5D7916754E45af17a4913B",
     3,
     0,
     0,
     "11074617"
   ],
   [
-    "0x",
+    "0x0d4DA345ce8c07627d5D7916754E45af17a4913B",
     "UNISWAP ESPR/USDT BLUE",
-    "https://uniswap.info/pair/0x",
+    "https://uniswap.info/pair/0x0d4DA345ce8c07627d5D7916754E45af17a4913B",
     3,
     0,
     0,
@@ -1358,11 +1358,11 @@ var pools = [
     });
 
     ctx0.methods.getStartVoteBlock().call(function(err, result) {
-      $(".startvoteblock").text('#' + result);
+      // $(".startvoteblock").text('#' + result);
     });
     
     ctx0.methods.getEndVoteBlock().call(function(err, result) {
-      $(".endvoteblock").text('#' + result);
+      // $(".endvoteblock").text('#' + result);
     });
 
     ctx0.methods.getPoolWinner().call(function(err, result) {      
@@ -1529,11 +1529,11 @@ var pools = [
     });
     
     ctx0.methods.getStartMinorityBlock().call(function(err, result) {            
-      $(".startminorityblock").text('#' + result);
+      // $(".startminorityblock").text('#' + result);
     });
     
     ctx0.methods.getEndMinorityBlock().call(function(err, result) {      
-      $(".endminorityblock").text('#' + result);
+      // $(".endminorityblock").text('#' + result);
     });    
 
     web3.eth.getBlockNumber(function(error, result){
