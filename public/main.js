@@ -7,9 +7,9 @@ var web3 = new Web3(
 
   const BN = web3.utils.BN;
   
-  var farmingAddress = "0x20cAC56EA5A7F670ae1afbE41d0B7BA07B58dE21"; //farming address
-  const tokenAddress = "0x63DF8a7F806e0704A532f140816f4022589c9040"; // token
-  const tokenLatteAddress = "0xDa67Fc2c18Ce45c6f813df8a9D81604db810DC5f"; // token Latte
+  var farmingAddress = "0x"; //farming address
+  const tokenAddress = "0x"; // token
+  const tokenLatteAddress = "0x"; // token Latte
   const uni1 = "0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc"; // USDC
 
   var ethconnected = false;
@@ -547,27 +547,27 @@ var web3 = new Web3(
 //contract,name,url,weight,yield
 var pools = [
   [
-    "0x08506C161380506BAd502D75801078b5663e55E5",
+    "0x",
     "UNISWAP ESPR/ETH RED",
-    "https://uniswap.info/pair/0x08506C161380506BAd502D75801078b5663e55E5",
+    "https://uniswap.info/pair/0x",
     6,
     0,
     0,
     "-"
   ],
   [
-    "0x08506C161380506BAd502D75801078b5663e55E5",
+    "0x",
     "UNISWAP ESPR/ETH GREEN",
-    "https://uniswap.info/pair/0x08506C161380506BAd502D75801078b5663e55E5",
+    "https://uniswap.info/pair/0x",
     6,
     0,
     0,
     "-"
   ],
   [
-    "0x08506C161380506BAd502D75801078b5663e55E5",
+    "0x",
     "UNISWAP ESPR/ETH BLUE",
-    "https://uniswap.info/pair/0x08506C161380506BAd502D75801078b5663e55E5",
+    "https://uniswap.info/pair/0x",
     6,
     0,
     0,
@@ -660,7 +660,7 @@ var pools = [
   var totalPoolWeight = 36; // sum of weight
   function updateYield() {
     // need modification
-    var perblock = 11;
+    var perblock = 12;
     var annualblock = (365 * 86400) / 15; // approximation of 15 sec/block
     var annualreward = annualblock * perblock;
     var perpoolunit = annualreward / totalPoolWeight;
@@ -1373,19 +1373,19 @@ var pools = [
         y.style.display = "none";
         z.style.display = "none";
 
-        pools[0][3] = 12;
+        pools[0][3] = 18;
         pools[1][3] = 6;
         pools[2][3] = 6;
 
-        pools[3][3] = 6;
+        pools[3][3] = 9;
         pools[4][3] = 3;
         pools[5][3] = 3;
 
-        pools[6][3] = 4;
+        pools[6][3] = 6;
         pools[7][3] = 2;
         pools[8][3] = 2;
 
-        pools[9][3] = 2;
+        pools[9][3] = 3;
         pools[10][3] = 1;
         pools[11][3] = 1;
       } else if (result == 1)
@@ -1395,19 +1395,19 @@ var pools = [
         z.style.display = "none";
 
         pools[0][3] = 6;
-        pools[1][3] = 12;
+        pools[1][3] = 18;
         pools[2][3] = 6;
 
         pools[3][3] = 3;
-        pools[4][3] = 6;
+        pools[4][3] = 9;
         pools[5][3] = 3;
 
         pools[6][3] = 2;
-        pools[7][3] = 4;
+        pools[7][3] = 6;
         pools[8][3] = 2;
 
         pools[9][3] = 1;
-        pools[10][3] = 2;
+        pools[10][3] = 3;
         pools[11][3] = 1;
 
       } else if (result == 2)
@@ -1418,19 +1418,19 @@ var pools = [
 
         pools[0][3] = 6;
         pools[1][3] = 6;
-        pools[2][3] = 12;
+        pools[2][3] = 18;
 
         pools[3][3] = 3;
         pools[4][3] = 3;
-        pools[5][3] = 6;
+        pools[5][3] = 9;
 
         pools[6][3] = 2;
         pools[7][3] = 2;
-        pools[8][3] = 4;
+        pools[8][3] = 6;
 
         pools[9][3] = 1;
         pools[10][3] = 1;
-        pools[11][3] = 2;
+        pools[11][3] = 3;
       } else {           
         x.style.display = "none";
         y.style.display = "none";
