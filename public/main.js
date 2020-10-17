@@ -1557,7 +1557,7 @@ var pools = [
     });      
   }
 
-  function getlptoken(id) {
+  function getlptoken(id) {    
     if (typeof id === "undefined") {
       window.open(pools[currentPagePoolID][2]);
     } else {
