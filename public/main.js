@@ -534,6 +534,50 @@ var web3 = new Web3(
       stateMutability: "view",
       type: "function",
     },
+    {
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        }
+      ],
+      name: "poolInfo",
+      outputs: [
+        {
+          internalType: "address",
+          name: "lpToken",
+          type: "address",
+        },
+        {
+          internalType: "uint256",
+          name: "allocPoint",
+          type: "uint256",
+        },
+        {
+          internalType: "uint256",
+          name: "lastRewardBlock",
+          type: "uint256",
+        },
+        {
+          internalType: "uint256",
+          name: "accEspressoPerShare",
+          type: "uint256",
+        },
+        {
+          internalType: "bool",
+          name: "taxable",
+          type: "bool",
+        },
+        {
+          internalType: "bool",
+          name: "isOpen",
+          type: "bool",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
   ];
 
   var prices = {
@@ -665,302 +709,414 @@ var pools = [
     var annualreward = annualblock * perblock;
     var perpoolunit = annualreward / totalPoolWeight;
 
-    var ctx0 = new web3.eth.Contract(uniswapABI, pools[0][0]);
+    var ctx0 = new web3.eth.Contract(uniswapABI, pools[0][0]);    
     ctx0.methods.getReserves().call(function (err, result1) {
       ctx0.methods.totalSupply().call(function (err, result2) {
-        ctx0.methods.balanceOf(farmingAddress).call(function (err, result3) {
-          var totalSupply = result2; // total supply of UNI-V2
-          var stakedSupply = result3; // staked amount in farm
-          var percentageOfSupplyInPool = stakedSupply / totalSupply;
-          pools[0][4] =
-            ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
-              100 * pools[0][3]) / percentageOfSupplyInPool;
-          pools[0][5] =
-            ((prices["tokenusd"] * result1["_reserve0"]) /
-              Math.pow(10, 18)) *
-            percentageOfSupplyInPool;
-            if(isNaN(parseInt(pools[0][4]))) {
-              $(".pool0yield").text('---.-%');
-            } else {
-              $(".pool0yield").animateNumbers(parseInt(pools[0][4]) + "%");
-            }
-          loadedPool();
+        ctx0.methods.balanceOf(farmingAddress).call(function (err, result3) {          
+          
+          var ctx1 = new web3.eth.Contract(farmABI, farmingAddress);   
+          ctx1.methods.poolInfo(0).call(function (err, result4) {
+            ctx1.methods.poolInfo(1).call(function (err, result5) {
+              ctx1.methods.poolInfo(2).call(function (err, result6) {                
+                
+                var totalPool = new BN(result4[3]).add(new BN(result5[3])).add(new BN(result6[3]));                
+                if(result4[3] == 0) result4[3] = 1;
+                var percentageOfSupplyInPool = result4[3] / totalPool;
+                
+                pools[0][4] =
+                  ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
+                    100 * pools[0][3]) / percentageOfSupplyInPool;
+                
+                    pools[0][5] =
+                  ((prices["tokenusd"] * result1["_reserve0"]) /
+                    Math.pow(10, 18)) *
+                  percentageOfSupplyInPool;
+                  if(isNaN(parseInt(pools[0][4]))) {
+                    $(".pool0yield").text('---.-%');
+                  } else {
+                    $(".pool0yield").animateNumbers(parseInt(pools[0][4]) + "%");
+                  }
+                loadedPool();
+              });
+            });
+          });
         });
       });
     });
 
-    var ctx1 = new web3.eth.Contract(uniswapABI, pools[1][0]);
-    ctx1.methods.getReserves().call(function (err, result1) {
-      ctx1.methods.totalSupply().call(function (err, result2) {
-        ctx1.methods.balanceOf(farmingAddress).call(function (err, result3) {
-          var totalSupply = result2; // total supply of UNI-V2
-          var stakedSupply = result3; // staked amount in farm
-          var percentageOfSupplyInPool = stakedSupply / totalSupply;
-          pools[1][4] =
-            ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
-              100 * pools[1][3]) / percentageOfSupplyInPool;
-          pools[1][5] =
-            ((prices["tokenusd"] * result1["_reserve0"]) /
-              Math.pow(10, 18)) *
-            percentageOfSupplyInPool;
-            if(isNaN(parseInt(pools[1][4]))) {
-              $(".pool1yield").text('---.-%');
-            } else {
-              $(".pool1yield").animateNumbers(parseInt(pools[1][4]) + "%");
-            }
-          loadedPool();
-        });
-      });
-    });
-
-    var ctx2 = new web3.eth.Contract(uniswapABI, pools[2][0]);
+    var ctx2 = new web3.eth.Contract(uniswapABI, pools[1][0]);
     ctx2.methods.getReserves().call(function (err, result1) {
       ctx2.methods.totalSupply().call(function (err, result2) {
         ctx2.methods.balanceOf(farmingAddress).call(function (err, result3) {
-          var totalSupply = result2; // total supply of UNI-V2
-          var stakedSupply = result3; // staked amount in farm
-          var percentageOfSupplyInPool = stakedSupply / totalSupply;
-          pools[2][4] =
-            ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
-              100 * pools[2][3]) / percentageOfSupplyInPool;
-          pools[2][5] =
-            ((prices["tokenusd"] * result1["_reserve0"]) /
-              Math.pow(10, 18)) *
-            percentageOfSupplyInPool;
-            if(isNaN(parseInt(pools[2][4]))) {
-              $(".pool2yield").text('---.-%');
-            } else {
-              $(".pool2yield").animateNumbers(parseInt(pools[2][4]) + "%");
-            }
-          loadedPool();
+          var ctx3 = new web3.eth.Contract(farmABI, farmingAddress);   
+          ctx3.methods.poolInfo(0).call(function (err, result4) {
+            ctx3.methods.poolInfo(1).call(function (err, result5) {
+              ctx3.methods.poolInfo(2).call(function (err, result6) {                
+                                
+                var totalPool = new BN(result4[3]).add(new BN(result5[3])).add(new BN(result6[3]));                
+                if(result5[3] == 0) result5[3] = 1;
+                var percentageOfSupplyInPool = result5[3] / totalPool;
+
+                pools[1][4] =
+                  ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
+                    100 * pools[1][3]) / percentageOfSupplyInPool;
+                pools[1][5] =
+                  ((prices["tokenusd"] * result1["_reserve0"]) /
+                    Math.pow(10, 18)) *
+                  percentageOfSupplyInPool;
+                  if(isNaN(parseInt(pools[1][4]))) {
+                    $(".pool1yield").text('---.-%');
+                  } else {
+                    $(".pool1yield").animateNumbers(parseInt(pools[1][4]) + "%");
+                  }
+                loadedPool();
+              });
+            });
+          });
         });
       });
     });
 
-    var ctx3 = new web3.eth.Contract(uniswapABI, pools[3][0]);
-    ctx3.methods.getReserves().call(function (err, result1) {
-      ctx3.methods.totalSupply().call(function (err, result2) {
-        ctx3.methods.balanceOf(farmingAddress).call(function (err, result3) {
-          var totalSupply = result2; // total supply of UNI-V2
-          var stakedSupply = result3; // staked amount in farm
-          var percentageOfSupplyInPool = stakedSupply / totalSupply;
-          pools[3][4] =
-            ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
-              100 * pools[3][3]) / percentageOfSupplyInPool;
-          pools[3][5] =
-            ((prices["tokenusd"] * result1["_reserve0"]) /
-              Math.pow(10, 18)) *
-            percentageOfSupplyInPool;
-            if(isNaN(parseInt(pools[3][4]))) {
-              $(".pool3yield").text('---.-%');
-            } else {
-              $(".pool3yield").animateNumbers(parseInt(pools[3][4]) + "%");
-            }
-          loadedPool();
-        });
-      });
-    });
-
-    var ctx4 = new web3.eth.Contract(uniswapABI, pools[4][0]);
+    var ctx4 = new web3.eth.Contract(uniswapABI, pools[2][0]);
     ctx4.methods.getReserves().call(function (err, result1) {
       ctx4.methods.totalSupply().call(function (err, result2) {
         ctx4.methods.balanceOf(farmingAddress).call(function (err, result3) {
-          var totalSupply = result2; // total supply of UNI-V2
-          var stakedSupply = result3; // staked amount in farm
-          var percentageOfSupplyInPool = stakedSupply / totalSupply;
-          pools[4][4] =
-            ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
-              100 * pools[4][3]) / percentageOfSupplyInPool;
-          pools[4][5] =
-            ((prices["tokenusd"] * result1["_reserve0"]) /
-              Math.pow(10, 18)) *
-            percentageOfSupplyInPool;
-            if(isNaN(parseInt(pools[4][4]))) {
-              $(".pool4yield").text('---.-%');
-            } else {
-              $(".pool4yield").animateNumbers(parseInt(pools[4][4]) + "%");
-            }
-          loadedPool();
+          var ctx5 = new web3.eth.Contract(farmABI, farmingAddress);   
+          ctx5.methods.poolInfo(0).call(function (err, result4) {
+            ctx5.methods.poolInfo(1).call(function (err, result5) {
+              ctx5.methods.poolInfo(2).call(function (err, result6) {                
+
+                var totalPool = new BN(result4[3]).add(new BN(result5[3])).add(new BN(result6[3]));                
+                if(result6[3] == 0) result6[3] = 1;
+                var percentageOfSupplyInPool = result6[3] / totalPool;
+          
+                pools[2][4] =
+                  ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
+                    100 * pools[2][3]) / percentageOfSupplyInPool;
+                pools[2][5] =
+                  ((prices["tokenusd"] * result1["_reserve0"]) /
+                    Math.pow(10, 18)) *
+                  percentageOfSupplyInPool;
+                  if(isNaN(parseInt(pools[2][4]))) {
+                    $(".pool2yield").text('---.-%');
+                  } else {
+                    $(".pool2yield").animateNumbers(parseInt(pools[2][4]) + "%");
+                  }
+                loadedPool();
+              });
+            });
+          });
         });
       });
     });
 
-    var ctx5 = new web3.eth.Contract(uniswapABI, pools[5][0]);
-    ctx5.methods.getReserves().call(function (err, result1) {
-      ctx5.methods.totalSupply().call(function (err, result2) {
-        ctx5.methods.balanceOf(farmingAddress).call(function (err, result3) {
-          var totalSupply = result2; // total supply of UNI-V2
-          var stakedSupply = result3; // staked amount in farm
-          var percentageOfSupplyInPool = stakedSupply / totalSupply;
-          pools[5][4] =
-            ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
-              100 * pools[5][3]) / percentageOfSupplyInPool;
-          pools[5][5] =
-            ((prices["tokenusd"] * result1["_reserve0"]) /
-              Math.pow(10, 18)) *
-            percentageOfSupplyInPool;
-            if(isNaN(parseInt(pools[5][4]))) {
-              $(".pool5yield").text('---.-%');
-            } else {
-              $(".pool5yield").animateNumbers(parseInt(pools[5][4]) + "%");
-            }
-          loadedPool();
-        });
-      });
-    });
-
-    var ctx6 = new web3.eth.Contract(uniswapABI, pools[6][0]);
+    var ctx6 = new web3.eth.Contract(uniswapABI, pools[3][0]);
     ctx6.methods.getReserves().call(function (err, result1) {
       ctx6.methods.totalSupply().call(function (err, result2) {
         ctx6.methods.balanceOf(farmingAddress).call(function (err, result3) {
-          var totalSupply = result2; // total supply of UNI-V2
-          var stakedSupply = result3; // staked amount in farm
-          var percentageOfSupplyInPool = stakedSupply / totalSupply;
-          pools[6][4] =
-            (((perpoolunit * prices["tokeneth"]) /
-              (result1["_reserve1"] / Math.pow(10, 18))) *
-              100 *
-              pools[6][3]) /
-            percentageOfSupplyInPool;
-          pools[6][5] =
-            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
-            percentageOfSupplyInPool;
-            if(isNaN(parseInt(pools[6][4]))) {
-              $(".pool6yield").text('---.-%');
-            } else {
-              $(".pool6yield").animateNumbers(parseInt(pools[6][4]) + "%");
-            }
-          loadedPool();
+          var ctx7 = new web3.eth.Contract(farmABI, farmingAddress);   
+          ctx7.methods.poolInfo(3).call(function (err, result4) {
+            ctx7.methods.poolInfo(4).call(function (err, result5) {
+              ctx7.methods.poolInfo(5).call(function (err, result6) {                
+
+                var totalPool = new BN(result4[3]).add(new BN(result5[3])).add(new BN(result6[3]));                
+                if(result4[3] == 0) result4[3] = 1;
+                var percentageOfSupplyInPool = result4[3] / totalPool;
+          
+                pools[3][4] =
+                  ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
+                    100 * pools[3][3]) / percentageOfSupplyInPool;
+                pools[3][5] =
+                  ((prices["tokenusd"] * result1["_reserve0"]) /
+                    Math.pow(10, 18)) *
+                  percentageOfSupplyInPool;
+                  if(isNaN(parseInt(pools[3][4]))) {
+                    $(".pool3yield").text('---.-%');
+                  } else {
+                    $(".pool3yield").animateNumbers(parseInt(pools[3][4]) + "%");
+                  }
+                loadedPool();
+              });
+            });
+          });
         });
       });
     });
 
-    var ctx7 = new web3.eth.Contract(uniswapABI, pools[7][0]);
-    ctx7.methods.getReserves().call(function (err, result1) {
-      ctx7.methods.totalSupply().call(function (err, result2) {
-        ctx7.methods.balanceOf(farmingAddress).call(function (err, result3) {
-          var totalSupply = result2; // total supply of UNI-V2
-          var stakedSupply = result3; // staked amount in farm
-          var percentageOfSupplyInPool = stakedSupply / totalSupply;
-          pools[7][4] =
-            (((perpoolunit * prices["tokeneth"]) /
-              (result1["_reserve1"] / Math.pow(10, 18))) *
-              100 *
-              pools[7][3]) /
-            percentageOfSupplyInPool;
-          pools[7][5] =
-            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
-            percentageOfSupplyInPool;
-            if(isNaN(parseInt(pools[7][4]))) {
-              $(".pool7yield").text('---.-%');
-            } else {
-              $(".pool7yield").animateNumbers(parseInt(pools[7][4]) + "%");
-            }
-          loadedPool();
-        });
-      });
-    });
-
-    var ctx8 = new web3.eth.Contract(uniswapABI, pools[8][0]);
+    var ctx8 = new web3.eth.Contract(uniswapABI, pools[4][0]);
     ctx8.methods.getReserves().call(function (err, result1) {
       ctx8.methods.totalSupply().call(function (err, result2) {
         ctx8.methods.balanceOf(farmingAddress).call(function (err, result3) {
-          var totalSupply = result2; // total supply of UNI-V2
-          var stakedSupply = result3; // staked amount in farm
-          var percentageOfSupplyInPool = stakedSupply / totalSupply;
-          pools[8][4] =
-            (((perpoolunit * prices["tokeneth"]) /
-              (result1["_reserve1"] / Math.pow(10, 18))) *
-              100 *
-              pools[8][3]) /
-            percentageOfSupplyInPool;
-          pools[8][5] =
-            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
-            percentageOfSupplyInPool;
-            if(isNaN(parseInt(pools[8][4]))) {
-              $(".pool8yield").text('---.-%');
-            } else {
-              $(".pool8yield").animateNumbers(parseInt(pools[8][4]) + "%");
-            }
-          loadedPool();
+          var ctx9 = new web3.eth.Contract(farmABI, farmingAddress);   
+          ctx9.methods.poolInfo(3).call(function (err, result4) {
+            ctx9.methods.poolInfo(4).call(function (err, result5) {
+              ctx9.methods.poolInfo(5).call(function (err, result6) {                
+
+                var totalPool = new BN(result4[3]).add(new BN(result5[3])).add(new BN(result6[3]));                
+                if(result5[3] == 0) result5[3] = 1;
+                var percentageOfSupplyInPool = result5[3] / totalPool;
+          
+                pools[4][4] =
+                  ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
+                    100 * pools[4][3]) / percentageOfSupplyInPool;
+                pools[4][5] =
+                  ((prices["tokenusd"] * result1["_reserve0"]) /
+                    Math.pow(10, 18)) *
+                  percentageOfSupplyInPool;
+                  if(isNaN(parseInt(pools[4][4]))) {
+                    $(".pool4yield").text('---.-%');
+                  } else {
+                    $(".pool4yield").animateNumbers(parseInt(pools[4][4]) + "%");
+                  }
+                loadedPool();
+              });
+            });
+          });
         });
       });
     });
 
-    var ctx9 = new web3.eth.Contract(uniswapABI, pools[9][0]);
-    ctx9.methods.getReserves().call(function (err, result1) {
-      ctx9.methods.totalSupply().call(function (err, result2) {
-        ctx9.methods.balanceOf(farmingAddress).call(function (err, result3) {
-          var totalSupply = result2; // total supply of UNI-V2
-          var stakedSupply = result3; // staked amount in farm
-          var percentageOfSupplyInPool = stakedSupply / totalSupply;
-          pools[9][4] =
-            (((perpoolunit * prices["tokeneth"]) /
-              (result1["_reserve1"] / Math.pow(10, 18))) *
-              100 *
-              pools[9][3]) /
-            percentageOfSupplyInPool;
-          pools[9][5] =
-            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
-            percentageOfSupplyInPool;
-            if(isNaN(parseInt(pools[9][4]))) {
-              $(".pool9yield").text('---.-%');
-            } else {
-              $(".pool9yield").animateNumbers(parseInt(pools[9][4]) + "%");
-            }
-          loadedPool();
-        });
-      });
-    });
-
-    var ctx10 = new web3.eth.Contract(uniswapABI, pools[10][0]);
+    var ctx10 = new web3.eth.Contract(uniswapABI, pools[5][0]);
     ctx10.methods.getReserves().call(function (err, result1) {
       ctx10.methods.totalSupply().call(function (err, result2) {
         ctx10.methods.balanceOf(farmingAddress).call(function (err, result3) {
-          var totalSupply = result2; // total supply of UNI-V2
-          var stakedSupply = result3; // staked amount in farm
-          var percentageOfSupplyInPool = stakedSupply / totalSupply;
-          pools[10][4] =
-            (((perpoolunit * prices["tokeneth"]) /
-              (result1["_reserve1"] / Math.pow(10, 18))) *
-              100 *
-              pools[10][3]) /
-            percentageOfSupplyInPool;
-          pools[10][5] =
-            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
-            percentageOfSupplyInPool;
-            if(isNaN(parseInt(pools[10][4]))) {
-              $(".pool10yield").text('---.-%');
-            } else {
-              $(".pool10yield").animateNumbers(parseInt(pools[10][4]) + "%");
-            }
-          loadedPool();
+          var ctx11 = new web3.eth.Contract(farmABI, farmingAddress);   
+          ctx11.methods.poolInfo(3).call(function (err, result4) {
+            ctx11.methods.poolInfo(4).call(function (err, result5) {
+              ctx11.methods.poolInfo(5).call(function (err, result6) {                
+
+                var totalPool = new BN(result4[3]).add(new BN(result5[3])).add(new BN(result6[3]));                
+                if(result6[3] == 0) result6[3] = 1;
+                var percentageOfSupplyInPool = result6[3] / totalPool;
+          
+                pools[5][4] =
+                  ((perpoolunit / (result1["_reserve0"] / Math.pow(10, 18))) *
+                    100 * pools[5][3]) / percentageOfSupplyInPool;
+                pools[5][5] =
+                  ((prices["tokenusd"] * result1["_reserve0"]) /
+                    Math.pow(10, 18)) *
+                  percentageOfSupplyInPool;
+                  if(isNaN(parseInt(pools[5][4]))) {
+                    $(".pool5yield").text('---.-%');
+                  } else {
+                    $(".pool5yield").animateNumbers(parseInt(pools[5][4]) + "%");
+                  }
+                loadedPool();
+              });
+            });
+          });
         });
       });
     });
 
-    var ctx11 = new web3.eth.Contract(uniswapABI, pools[11][0]);
-    ctx11.methods.getReserves().call(function (err, result1) {
-      ctx11.methods.totalSupply().call(function (err, result2) {
-        ctx11.methods.balanceOf(farmingAddress).call(function (err, result3) {
-          var totalSupply = result2; // total supply of UNI-V2
-          var stakedSupply = result3; // staked amount in farm
-          var percentageOfSupplyInPool = stakedSupply / totalSupply;
-          pools[11][4] =
-            (((perpoolunit * prices["tokeneth"]) /
-              (result1["_reserve1"] / Math.pow(10, 18))) *
-              100 *
-              pools[11][3]) /
-            percentageOfSupplyInPool;
-          pools[11][5] =
-            ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
-            percentageOfSupplyInPool;
-            if(isNaN(parseInt(pools[11][4]))) {
-              $(".pool11yield").text('---.-%');
-            } else {
-              $(".pool11yield").animateNumbers(parseInt(pools[11][4]) + "%");
-            }
-          loadedPool();
+    var ctx12 = new web3.eth.Contract(uniswapABI, pools[6][0]);
+    ctx12.methods.getReserves().call(function (err, result1) {
+      ctx12.methods.totalSupply().call(function (err, result2) {
+        ctx12.methods.balanceOf(farmingAddress).call(function (err, result3) {
+          var ctx13 = new web3.eth.Contract(farmABI, farmingAddress);   
+          ctx13.methods.poolInfo(6).call(function (err, result4) {
+            ctx13.methods.poolInfo(7).call(function (err, result5) {
+              ctx13.methods.poolInfo(8).call(function (err, result6) {                
+
+                var totalPool = new BN(result4[3]).add(new BN(result5[3])).add(new BN(result6[3]));                
+                if(result4[3] == 0) result4[3] = 1;
+                var percentageOfSupplyInPool = result4[3] / totalPool;
+          
+                pools[6][4] =
+                  (((perpoolunit) /
+                    (result1["_reserve1"] / Math.pow(10, 18))) *
+                    100 *
+                    pools[6][3]) /
+                  percentageOfSupplyInPool;
+                pools[6][5] =
+                  ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+                  percentageOfSupplyInPool;
+                  if(isNaN(parseInt(pools[6][4]))) {
+                    $(".pool6yield").text('---.-%');
+                  } else {
+                    $(".pool6yield").animateNumbers(parseInt(pools[6][4]) + "%");
+                  }
+                loadedPool();
+              });
+            });
+          });
+        });
+      });
+    });
+
+    var ctx14 = new web3.eth.Contract(uniswapABI, pools[7][0]);
+    ctx14.methods.getReserves().call(function (err, result1) {
+      ctx14.methods.totalSupply().call(function (err, result2) {
+        ctx14.methods.balanceOf(farmingAddress).call(function (err, result3) {
+          var ctx15 = new web3.eth.Contract(farmABI, farmingAddress);   
+          ctx15.methods.poolInfo(6).call(function (err, result4) {
+            ctx15.methods.poolInfo(7).call(function (err, result5) {
+              ctx15.methods.poolInfo(8).call(function (err, result6) {                
+
+                var totalPool = new BN(result4[3]).add(new BN(result5[3])).add(new BN(result6[3]));                
+                if(result5[3] == 0) result5[3] = 1;
+                var percentageOfSupplyInPool = result5[3] / totalPool;
+
+                pools[7][4] =
+                  (((perpoolunit) /
+                    (result1["_reserve1"] / Math.pow(10, 18))) *
+                    100 *
+                    pools[7][3]) /
+                  percentageOfSupplyInPool;
+
+                pools[7][5] =
+                  ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+                  percentageOfSupplyInPool;
+                  if(isNaN(parseInt(pools[7][4]))) {
+                    $(".pool7yield").text('---.-%');
+                  } else {
+                    $(".pool7yield").animateNumbers(parseInt(pools[7][4]) + "%");
+                  }
+                loadedPool();
+              });
+            });
+          });
+        });
+      });
+    });
+
+    var ctx16 = new web3.eth.Contract(uniswapABI, pools[8][0]);
+    ctx16.methods.getReserves().call(function (err, result1) {
+      ctx16.methods.totalSupply().call(function (err, result2) {
+        ctx16.methods.balanceOf(farmingAddress).call(function (err, result3) {
+          var ctx17 = new web3.eth.Contract(farmABI, farmingAddress);   
+          ctx17.methods.poolInfo(6).call(function (err, result4) {
+            ctx17.methods.poolInfo(7).call(function (err, result5) {
+              ctx17.methods.poolInfo(8).call(function (err, result6) {                
+
+                var totalPool = new BN(result4[3]).add(new BN(result5[3])).add(new BN(result6[3]));                
+                if(result6[3] == 0) result6[3] = 1;
+                var percentageOfSupplyInPool = result6[3] / totalPool;
+          
+                pools[8][4] =
+                  (((perpoolunit) /
+                    (result1["_reserve1"] / Math.pow(10, 18))) *
+                    100 *
+                    pools[8][3]) /
+                  percentageOfSupplyInPool;
+                pools[8][5] =
+                  ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+                  percentageOfSupplyInPool;
+                  if(isNaN(parseInt(pools[8][4]))) {
+                    $(".pool8yield").text('---.-%');
+                  } else {
+                    $(".pool8yield").animateNumbers(parseInt(pools[8][4]) + "%");
+                  }
+                loadedPool();
+              });
+            });
+          });
+        });
+      });
+    });
+
+    var ctx18 = new web3.eth.Contract(uniswapABI, pools[9][0]);
+    ctx18.methods.getReserves().call(function (err, result1) {
+      ctx18.methods.totalSupply().call(function (err, result2) {
+        ctx18.methods.balanceOf(farmingAddress).call(function (err, result3) {
+          var ctx19 = new web3.eth.Contract(farmABI, farmingAddress);   
+          ctx19.methods.poolInfo(9).call(function (err, result4) {
+            ctx19.methods.poolInfo(10).call(function (err, result5) {
+              ctx19.methods.poolInfo(11).call(function (err, result6) {                
+
+                var totalPool = new BN(result4[3]).add(new BN(result5[3])).add(new BN(result6[3]));                
+                if(result4[3] == 0) result4[3] = 1;
+                var percentageOfSupplyInPool = result4[3] / totalPool;                              
+          
+                pools[9][4] =
+                  (((perpoolunit) /
+                    (result1["_reserve1"] / Math.pow(10, 18))) *
+                    100 *
+                    pools[9][3]) /
+                  percentageOfSupplyInPool;
+                pools[9][5] =
+                  ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+                  percentageOfSupplyInPool;
+                  if(isNaN(parseInt(pools[9][4]))) {
+                    $(".pool9yield").text('---.-%');
+                  } else {
+                    $(".pool9yield").animateNumbers(parseInt(pools[9][4]) + "%");
+                  }
+                loadedPool();
+              });
+            });
+          });
+        });
+      });
+    });
+
+    var ctx20 = new web3.eth.Contract(uniswapABI, pools[10][0]);
+    ctx20.methods.getReserves().call(function (err, result1) {
+      ctx20.methods.totalSupply().call(function (err, result2) {
+        ctx20.methods.balanceOf(farmingAddress).call(function (err, result3) {
+          var ctx21 = new web3.eth.Contract(farmABI, farmingAddress);   
+          ctx21.methods.poolInfo(9).call(function (err, result4) {
+            ctx21.methods.poolInfo(10).call(function (err, result5) {
+              ctx21.methods.poolInfo(11).call(function (err, result6) {                
+
+                var totalPool = new BN(result4[3]).add(new BN(result5[3])).add(new BN(result6[3]));                
+                if(result5[3] == 0) result5[3] = 1;
+                var percentageOfSupplyInPool = result5[3] / totalPool;
+
+                pools[10][4] =
+                  (((perpoolunit) /
+                    (result1["_reserve1"] / Math.pow(10, 18))) *
+                    100 *
+                    pools[10][3]) /
+                  percentageOfSupplyInPool;
+                
+                  pools[10][5] =
+                  ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+                  percentageOfSupplyInPool;
+                  if(isNaN(parseInt(pools[10][4]))) {
+                    $(".pool10yield").text('---.-%');
+                  } else {
+                    $(".pool10yield").animateNumbers(parseInt(pools[10][4]) + "%");
+                  }
+                loadedPool();
+              });
+            });
+          });
+        });
+      });
+    });
+
+    var ctx22 = new web3.eth.Contract(uniswapABI, pools[11][0]);
+    ctx22.methods.getReserves().call(function (err, result1) {
+      ctx22.methods.totalSupply().call(function (err, result2) {
+        ctx22.methods.balanceOf(farmingAddress).call(function (err, result3) {
+          var ctx23 = new web3.eth.Contract(farmABI, farmingAddress);   
+          ctx23.methods.poolInfo(9).call(function (err, result4) {
+            ctx23.methods.poolInfo(10).call(function (err, result5) {
+              ctx23.methods.poolInfo(11).call(function (err, result6) {                
+
+                var totalPool = new BN(result4[3]).add(new BN(result5[3])).add(new BN(result6[3]));                
+                if(result6[3] == 0) result6[3] = 1;
+                var percentageOfSupplyInPool = result6[3] / totalPool;
+                
+                pools[11][4] =
+                  (((perpoolunit) /
+                    (result1["_reserve1"] / Math.pow(10, 18))) *
+                    100 *
+                    pools[11][3]) /
+                  percentageOfSupplyInPool;
+                pools[11][5] =
+                  ((prices["ethusd"] * result1["_reserve1"]) / Math.pow(10, 18)) *
+                  percentageOfSupplyInPool;
+                  if(isNaN(parseInt(pools[11][4]))) {
+                    $(".pool11yield").text('---.-%');
+                  } else {
+                    $(".pool11yield").animateNumbers(parseInt(pools[11][4]) + "%");
+                  }
+                loadedPool();
+              });
+            });
+          });
         });
       });
     });
