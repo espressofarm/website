@@ -924,7 +924,7 @@ var pools = [
           
                 pools[6][4] =
                   (((perpoolunit) /
-                    (result1["_reserve1"] / Math.pow(10, 18))) *
+                    (result1["_reserve1"] / Math.pow(10, 18)* prices['tokeneth'])) *
                     100 *
                     pools[6][3]) /
                   percentageOfSupplyInPool;
@@ -959,7 +959,7 @@ var pools = [
 
                 pools[7][4] =
                   (((perpoolunit) /
-                    (result1["_reserve1"] / Math.pow(10, 18))) *
+                    (result1["_reserve1"] / Math.pow(10, 18)* prices['tokeneth'])) *
                     100 *
                     pools[7][3]) /
                   percentageOfSupplyInPool;
@@ -995,7 +995,7 @@ var pools = [
           
                 pools[8][4] =
                   (((perpoolunit) /
-                    (result1["_reserve1"] / Math.pow(10, 18))) *
+                    (result1["_reserve1"] / Math.pow(10, 18)* prices['tokeneth'])) *
                     100 *
                     pools[8][3]) /
                   percentageOfSupplyInPool;
@@ -1030,7 +1030,7 @@ var pools = [
           
                 pools[9][4] =
                   (((perpoolunit) /
-                    (result1["_reserve1"] / Math.pow(10, 18))) *
+                    (result1["_reserve1"] / Math.pow(10, 18)* prices['tokeneth'])) *
                     100 *
                     pools[9][3]) /
                   percentageOfSupplyInPool;
@@ -1065,7 +1065,7 @@ var pools = [
 
                 pools[10][4] =
                   (((perpoolunit) /
-                    (result1["_reserve1"] / Math.pow(10, 18))) *
+                    (result1["_reserve1"] / Math.pow(10, 18) * prices['tokeneth'])) *
                     100 *
                     pools[10][3]) /
                   percentageOfSupplyInPool;
@@ -1101,7 +1101,7 @@ var pools = [
                 
                 pools[11][4] =
                   (((perpoolunit) /
-                    (result1["_reserve1"] / Math.pow(10, 18))) *
+                    (result1["_reserve1"] / Math.pow(10, 18) * prices['tokeneth'])) *
                     100 *
                     pools[11][3]) /
                   percentageOfSupplyInPool;
