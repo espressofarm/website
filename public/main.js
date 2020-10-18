@@ -734,7 +734,7 @@ var pools = [
                   if(isNaN(parseInt(pools[0][4]))) {
                     $(".pool0yield").text('---.-%');
                   } else {
-                    $(".pool0yield").animateNumbers(parseInt(pools[0][4]) + "%");
+                    $(".pool0yield").animateNumbers(parseInt(pools[0][4]));
                   }
                 loadedPool();
               });
@@ -767,7 +767,7 @@ var pools = [
                   if(isNaN(parseInt(pools[1][4]))) {
                     $(".pool1yield").text('---.-%');
                   } else {
-                    $(".pool1yield").animateNumbers(parseInt(pools[1][4]) + "%");
+                    $(".pool1yield").animateNumbers(parseInt(pools[1][4]));
                   }
                 loadedPool();
               });
@@ -800,7 +800,7 @@ var pools = [
                   if(isNaN(parseInt(pools[2][4]))) {
                     $(".pool2yield").text('---.-%');
                   } else {
-                    $(".pool2yield").animateNumbers(parseInt(pools[2][4]) + "%");
+                    $(".pool2yield").animateNumbers(parseInt(pools[2][4]));
                   }
                 loadedPool();
               });
@@ -833,7 +833,7 @@ var pools = [
                   if(isNaN(parseInt(pools[3][4]))) {
                     $(".pool3yield").text('---.-%');
                   } else {
-                    $(".pool3yield").animateNumbers(parseInt(pools[3][4]) + "%");
+                    $(".pool3yield").animateNumbers(parseInt(pools[3][4]));
                   }
                 loadedPool();
               });
@@ -866,7 +866,7 @@ var pools = [
                   if(isNaN(parseInt(pools[4][4]))) {
                     $(".pool4yield").text('---.-%');
                   } else {
-                    $(".pool4yield").animateNumbers(parseInt(pools[4][4]) + "%");
+                    $(".pool4yield").animateNumbers(parseInt(pools[4][4]));
                   }
                 loadedPool();
               });
@@ -899,7 +899,7 @@ var pools = [
                   if(isNaN(parseInt(pools[5][4]))) {
                     $(".pool5yield").text('---.-%');
                   } else {
-                    $(".pool5yield").animateNumbers(parseInt(pools[5][4]) + "%");
+                    $(".pool5yield").animateNumbers(parseInt(pools[5][4]));
                   }
                 loadedPool();
               });
@@ -934,7 +934,7 @@ var pools = [
                   if(isNaN(parseInt(pools[6][4]))) {
                     $(".pool6yield").text('---.-%');
                   } else {
-                    $(".pool6yield").animateNumbers(parseInt(pools[6][4]) + "%");
+                    $(".pool6yield").animateNumbers(parseInt(pools[6][4]));
                   }
                 loadedPool();
               });
@@ -970,7 +970,7 @@ var pools = [
                   if(isNaN(parseInt(pools[7][4]))) {
                     $(".pool7yield").text('---.-%');
                   } else {
-                    $(".pool7yield").animateNumbers(parseInt(pools[7][4]) + "%");
+                    $(".pool7yield").animateNumbers(parseInt(pools[7][4]));
                   }
                 loadedPool();
               });
@@ -1005,7 +1005,7 @@ var pools = [
                   if(isNaN(parseInt(pools[8][4]))) {
                     $(".pool8yield").text('---.-%');
                   } else {
-                    $(".pool8yield").animateNumbers(parseInt(pools[8][4]) + "%");
+                    $(".pool8yield").animateNumbers(parseInt(pools[8][4]));
                   }
                 loadedPool();
               });
@@ -1040,7 +1040,7 @@ var pools = [
                   if(isNaN(parseInt(pools[9][4]))) {
                     $(".pool9yield").text('---.-%');
                   } else {
-                    $(".pool9yield").animateNumbers(parseInt(pools[9][4]) + "%");
+                    $(".pool9yield").animateNumbers(parseInt(pools[9][4]));
                   }
                 loadedPool();
               });
@@ -1076,7 +1076,7 @@ var pools = [
                   if(isNaN(parseInt(pools[10][4]))) {
                     $(".pool10yield").text('---.-%');
                   } else {
-                    $(".pool10yield").animateNumbers(parseInt(pools[10][4]) + "%");
+                    $(".pool10yield").animateNumbers(parseInt(pools[10][4]));
                   }
                 loadedPool();
               });
@@ -1111,7 +1111,7 @@ var pools = [
                   if(isNaN(parseInt(pools[11][4]))) {
                     $(".pool11yield").text('---.-%');
                   } else {
-                    $(".pool11yield").animateNumbers(parseInt(pools[11][4]) + "%");
+                    $(".pool11yield").animateNumbers(parseInt(pools[11][4]));
                   }
                 loadedPool();
               });
@@ -1553,6 +1553,8 @@ var pools = [
         pools[9][3] = 3;
         pools[10][3] = 1;
         pools[11][3] = 1;
+
+        totalPoolWeight = 60;
       } else if (result == 1)
       {        
         x.style.display = "none";
@@ -1575,6 +1577,7 @@ var pools = [
         pools[10][3] = 3;
         pools[11][3] = 1;
 
+        totalPoolWeight = 60;
       } else if (result == 2)
       {        
         x.style.display = "none";
@@ -1596,6 +1599,8 @@ var pools = [
         pools[9][3] = 1;
         pools[10][3] = 1;
         pools[11][3] = 3;
+        
+        totalPoolWeight = 60;
       } else {           
         x.style.display = "none";
         y.style.display = "none";
@@ -1616,6 +1621,8 @@ var pools = [
         pools[9][3] = 1;
         pools[10][3] = 1;
         pools[11][3] = 1;
+
+        totalPoolWeight = 36;
       }
 
       $(".badge0").text(pools[0][3] + 'X');
